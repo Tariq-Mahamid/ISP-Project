@@ -2,14 +2,12 @@ import Igis
 import Scenes
 
 class Player: RenderableEntity, KeyDownHandler {
-    var player: Rectangle
+    var player = Rectangle(rect:Rect(), fillMode:.fill)
     var canvasSize = Size()
     var playerSize = Size(width: 50, height: 50)
-    let velocity = 10
+    let velocity = 25
     
     init() {
-        player = Rectangle(rect:Rect(), fillMode:.fill)
-
         // Using a meaningful name can be helpful for debugging
         super.init(name: "Player")
     }
@@ -27,7 +25,6 @@ class Player: RenderableEntity, KeyDownHandler {
     }
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
-        
         switch key
         {
             case "a":
@@ -43,19 +40,7 @@ class Player: RenderableEntity, KeyDownHandler {
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
     
-    override func boundingRect() -> Rect
-    {
-        let boundingRect = player.rect
-          
-        let left = boundingRect.center.x - (boundingRect.width / 2)
-        let top = boundingRect.center.y - (boundingRect.height / 2)
-        let width =  boundingRect.width
-        let height = boundingRect.height
-
-        return Rect(topLeft: Point(x: left, y: top), size: Size(width: width, height: height))
-    }
     func move(_ addX: Int) {
-
         player.rect.topLeft = Point(x: player.rect.topLeft.x + addX, y: player.rect.topLeft.y)
     }
 

@@ -3,7 +3,7 @@ import Scenes
 
 class Apple : RenderableEntity{
 
-    var apple : Rectangle
+    var apple = Rectangle(rect: Rect())
     var velocity = 7
     var appleSize : Size
     var appleSpawnNumber = 1
@@ -11,7 +11,7 @@ class Apple : RenderableEntity{
     init(appleSpawnNumber: Int) {
         appleSize = Size(width: 50, height: 50)
         self.appleSpawnNumber = appleSpawnNumber
-        apple = Rectangle(rect: Rect())
+        //apple = Rectangle(rect: Rect())
         
         super.init(name: "Apple")
     }
