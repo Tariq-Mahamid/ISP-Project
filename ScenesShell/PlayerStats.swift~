@@ -1,0 +1,35 @@
+
+
+import Igis
+import Scenes
+
+class PlayerStats : RenderableEntity {
+    var background : Rectangle
+    private let playerName = "Naruto"
+    private let level = 56
+    private var health = 100
+    
+    let topLeft: Point
+    let size: Size
+    
+    init(topLeft: Point, size: Size) {
+        background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fill)
+        self.topLeft = topLeft
+        self.size = size
+        
+        super.init(name: "PlayerStats")    
+    }
+
+    override func render(canvas: Canvas){
+        background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fill)
+        canvas.render(FillStyle(color: Color(.black)), background)
+    }
+
+    func subtractHealth(amount: Int, healthBar: HealthBar){
+        let amountToSubtract = (health - amount) > 0 ? amount : 0
+
+        health -= amountToSubtract
+        healthBar.subtractHealth(amountToSubtract)
+    }
+}
+
