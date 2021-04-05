@@ -1,5 +1,5 @@
 import Scenes
- import Igis
+import Igis
 
   /*
      This class is responsible for rendering the background.

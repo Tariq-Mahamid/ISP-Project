@@ -1,0 +1,12 @@
+import Scenes
+
+class MainScene : Scene {
+
+    let testLayer = TestLayer()
+    
+    init() {
+        super.init(name:"Test")
+
+        insert(layer:testLayer, at:.front)
+    }
+}
