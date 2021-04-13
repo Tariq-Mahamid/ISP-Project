@@ -8,11 +8,13 @@ import Scenes
 
 class ForegroundLayer : Layer {
 
+    let scoreBoard = Scoreboard()
+    
       init() {
           // Using a meaningful name can be helpful for debugging
           super.init(name:"Foreground")
 
           // We insert our RenderableEntities in the constructor
-
+          insert(entity: self.scoreBoard, at: .front)
       }
   }

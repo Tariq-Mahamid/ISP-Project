@@ -31,7 +31,11 @@ class Garbage : RenderableEntity{
         garbage.rect.topLeft = Point(x: garbage.rect.topLeft.x, y: garbage.rect.topLeft.y + velocity)
     }
 
-    private func generateSpawnPoint( _ canvasSize: Size, garbageSpawnNumber : Int = 1) -> Point{
+    public func generateSpawnPoint( _ canvasSize: Size, garbageSpawnNumber : Int = 1) -> Point{
         return Point(x: Int.random(in: 0...canvasSize.width - garbageSize.width), y: Int.random(in: Int(-canvasSize.height / 2) * garbageSpawnNumber...Int(-canvasSize.height / 2) * (garbageSpawnNumber - 1)))
+    }
+
+    override func boundingRect() -> Rect{
+        return garbage.rect
     }
 }

@@ -21,7 +21,7 @@ class Player: RenderableEntity, KeyDownHandler {
     }
     
     override func render(canvas:Canvas) {
-        canvas.render(FillStyle(color: Color(.orange)), player)
+        canvas.render(FillStyle(color: Color(.purple)), player)
     }
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
@@ -47,4 +47,9 @@ class Player: RenderableEntity, KeyDownHandler {
     func willStayInCanvas(_ futurePosition: Int) -> Bool {
         return futurePosition > 0 && futurePosition < canvasSize.width
     }
+    
+    override func boundingRect() -> Rect {
+        return player.rect
+    }
+ 
 }
