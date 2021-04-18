@@ -15,7 +15,7 @@ class ForegroundLayer : Layer {
     let playerMoves : PlayerMoves
     let playerStats : PlayerStats
     let opponentStats : PlayerStats
-    private var enemyStunMoves = 0
+    private let enemyStunned = false
     
     init() {
         playerStats = PlayerStats(size: playerStatsSize, isOpponent: false)
@@ -47,7 +47,7 @@ class ForegroundLayer : Layer {
     public func initiateAttackSequence() {
         let playerMove = playerMoves.currentPlayerMoveRectangle.playerMove
         let damage = playerMove.getDamage()
-        let opponentDamage = isStunned() ? 0 : 10
+        let opponentDamage = playerMove.checkForStun() ? 0 : 10
         
         subtractHealth(amount: damage, healthBar: opponentHealthBar)
         subtractHealth(amount: opponentDamage, healthBar: playerHealthBar)
@@ -55,23 +55,6 @@ class ForegroundLayer : Layer {
         playerStats.displaySubtractedHealth(amount: opponentDamage)
         opponentStats.displaySubtractedHealth(amount: damage)
     }    
-
-    private func isStunned() -> Bool{
-        let playerMove = playerMoves.currentPlayerMoveRectangle.playerMove
-        let isStunned = playerMove.checkForStun()
-
-        if (enemyStunMoves > 0){
-            enemyStunMoves -= 1
-            return true
-        }
-        
-        if (isStunned) {
-            enemyStunMoves = 1
-            return true
-        }
-
-        return false
-    }
     
     public func subtractHealth(amount: Int, healthBar: HealthBar){
         if (healthBar.curHealth - amount >= 0) {
