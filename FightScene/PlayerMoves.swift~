@@ -114,15 +114,17 @@ class PlayerMoves : RenderableEntity, EntityMouseClickHandler {
     }
     
     override func render(canvas: Canvas){
-        for playerMoveRectangle in playerMoveRectangles{
-            let playerMove = playerMoveRectangle.playerMove
-            let rect = playerMoveRectangle.rectangle.rect
-            let name = playerMove.getName()
-            let color = playerMove.getMoveColor()
-            let rectCenter = Point(x: rect.topLeft.x + rect.size.width / 2, y: rect.topLeft.y + rect.size.height / 2)
-            
-            canvas.render(FillStyle(color: color), playerMoveRectangle.rectangle)
-            canvas.render(FillStyle(color: Color(.black)), Text(location: rectCenter, text: name))
+        if let canvasSize = canvas.canvasSize {
+            for playerMoveRectangle in playerMoveRectangles{
+                let playerMove = playerMoveRectangle.playerMove
+                let rect = playerMoveRectangle.rectangle.rect
+                let name = playerMove.getName()
+                let color = playerMove.getMoveColor()
+                let rectCenter = Point(x: rect.topLeft.x + rect.size.width / 2, y: rect.topLeft.y + rect.size.height / 2)
+                
+                canvas.render(FillStyle(color: color), playerMoveRectangle.rectangle)
+                canvas.render(FillStyle(color: Color(.black)), Text(location: rectCenter, text: name))
+            }
         }
     }
 }
