@@ -2,12 +2,15 @@ import Igis
 import Scenes
 
 class Garbage : RenderableEntity{
+    
 
     var garbage : Rectangle
     var velocity = 7
     var garbageSize : Size
     var garbageSpawnNumber = 1
-    
+    let scoreboard = Scoreboard()
+
+
     init(garbageSpawnNumber: Int) {
         garbageSize = Size(width: 50, height: 50)
         self.garbageSpawnNumber = garbageSpawnNumber
@@ -22,17 +25,24 @@ class Garbage : RenderableEntity{
     }
     
     override func render(canvas: Canvas){
-        canvas.render(FillStyle(color: Color(.darkgreen)), garbage)
+
+            canvas.render(FillStyle(color: Color(.darkgreen)), garbage)
+ 
     }
     
     override func calculate(canvasSize: Size){
-        if (garbage.rect.bottomLeft.y > canvasSize.height) {resetPosition(canvasSize)}
+        if (garbage.rect.bottomLeft.y > canvasSize.height) {
+            resetPosition(canvasSize)
+        }
         
         garbage.rect.topLeft = Point(x: garbage.rect.topLeft.x, y: garbage.rect.topLeft.y + velocity)
     }
 
     public func resetPosition(_ canvasSize: Size){
-        garbage.rect.topLeft = generateSpawnPoint(canvasSize)
+
+//        if hearts.playerLives > 0{
+            garbage.rect.topLeft = generateSpawnPoint(canvasSize)
+  //      }
     }
     
     private func generateSpawnPoint( _ canvasSize: Size, garbageSpawnNumber : Int = 1) -> Point{

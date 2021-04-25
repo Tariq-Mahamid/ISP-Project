@@ -6,9 +6,9 @@ import Scenes
    */
 
 
-class ForegroundLayer : Layer {
+class ForegroundLayerAS : Layer {
 
-    
+    let scoreboard = Scoreboard()
     
       init() {
           // Using a meaningful name can be helpful for debugging
