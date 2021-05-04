@@ -63,7 +63,7 @@ class Player: RenderableEntity, KeyDownHandler {
     }
     
     override func render(canvas:Canvas) {
-        let lineWidth = LineWidth(width:1)
+
         let canvasHeight = canvasSize.height
         let canvasWidth = canvasSize.width
         

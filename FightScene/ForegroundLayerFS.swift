@@ -1,7 +1,7 @@
 import Igis
 import Scenes
 
-class ForegroundLayer : Layer {
+class ForegroundLayerFS : Layer {
 
     let playerStatsSize = Size(width: 400, height: 250)
     let opponentStatsSize = Size(width: 400, height: 250)
@@ -28,7 +28,7 @@ class ForegroundLayer : Layer {
         super.init(name:"Foreground")
 
         // We insert our RenderableEntities in the constructor
-        insert(entity: Background(), at: .back)
+        insert(entity: BackgroundFS(), at: .back)
         insert(entity: playerStats, at: .front)
         insert(entity: opponentStats, at: .front)
         insert(entity: playerHealthBar, at: .front)
