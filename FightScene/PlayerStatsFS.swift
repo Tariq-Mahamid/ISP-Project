@@ -1,7 +1,7 @@
 import Igis
 import Scenes
  
-class PlayerStats : RenderableEntity {
+class PlayerStatsFS : RenderableEntity {
     var background = Rectangle(rect: Rect())
     private let playerName = "Naruto"
     private let level = 69
@@ -12,7 +12,7 @@ class PlayerStats : RenderableEntity {
     let isOpponent: Bool
     
     var topLeft = Point()
-    let size: Size
+    public let size: Size
     var didLoseHealth = false
     let minusText = Text(location: Point(), text: "yo")
     

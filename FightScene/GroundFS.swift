@@ -1,7 +1,7 @@
 import Igis
 import Scenes
 
-class Ground : RenderableEntity {
+class GroundFS : RenderableEntity {
 
     var ground = Rectangle(rect: Rect())
     

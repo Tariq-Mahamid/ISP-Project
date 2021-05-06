@@ -1,20 +1,3 @@
-
-/*
-          dispatcher.unregisterKeyDownHandler(handler: self)
-    }
-    override func boundingRect() -> Rect
-    {
-        let boundingRect = player.rect
-        
-        let left = boundingRect.center.x - (boundingRect.width / 2)
-        let top = boundingRect.center.y - (boundingRect.height / 2)
-        let width =  boundingRect.width
-        let height = boundingRect.height
-
-        return Rect(topLeft: Point(x: left, y: top), size: Size(width: width, height: height))
-    }
-     
- */
 import Igis
 import Scenes
 import Foundation
@@ -85,18 +68,18 @@ class Player: RenderableEntity, KeyDownHandler {
             
         }else if(((player.rect.topRight.x < (272*(specificCanvasWidth)/480)+x) && (player.rect.bottomLeft.y) >= canvasHeight-25  && (player.rect.topLeft.x) > (202*(specificCanvasWidth)/480)+x)){
 //            canvas.render(lineWidth, player)          
-            director.enqueueScene(scene:MainSceneFS())
+            director.enqueueScene(scene:FightScene())
             director.transitionToNextScene()
         }
         else if((player.rect.topLeft.y>(105*(canvasHeight)/272)) && ((player.rect.bottomLeft.y)<(170*((canvasHeight))/272)) && (player.rect.topLeft.x <= x+25)){
 //            canvas.render(lineWidth, player)
-            director.enqueueScene(scene:MainSceneFS())
+            director.enqueueScene(scene:FightScene())
             director.transitionToNextScene()
             
             
         }else if((player.rect.topRight.y>(105*(canvasHeight)/272)) && ((player.rect.bottomLeft.y)<(170*((canvasHeight))/272)) && (player.rect.topRight.x>=specificCanvasWidth+x-25)){
 //            canvas.render(lineWidth, player)
-            director.enqueueScene(scene:MainSceneFS())
+            director.enqueueScene(scene:FightScene())
             director.transitionToNextScene()
         }//else{
        // canvas.render(LineWidth(width:0), player)

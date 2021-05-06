@@ -2,7 +2,7 @@ import Igis
 import Scenes
 import Foundation
 
-class HealthBar : RenderableEntity{
+class HealthBarFS : RenderableEntity{
     public var healthRectangle = Rectangle(rect: Rect())
     let beginningHealthWidth : Int
     var healthSize : Size
