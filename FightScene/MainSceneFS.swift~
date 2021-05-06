@@ -1,8 +1,8 @@
 import Scenes
 
-class MainScene : Scene {
+class MainSceneAS : Scene {
 
-    let foregroundLayer = ForegroundLayer()
+    let foregroundLayer = ForegroundLayerFS()
     
     init() {
         super.init(name:"Main")
