@@ -10,7 +10,7 @@ class ForegroundLayerFS : Layer {
     let ground = GroundFS()
     let textDisplay = TextDisplayFS()
     let playerMovesArray : [PlayerMove]  
-    let chakra = 40
+    let chakra = 100
     let playerMoves : PlayerMovesFS
     let playerStats : PlayerStatsFS
     let opponentStats : PlayerStatsFS
