@@ -1,15 +1,17 @@
 import Igis
 import Scenes
 
-class Player: RenderableEntity, KeyDownHandler {
+class PlayerAS: RenderableEntity, KeyDownHandler {
     var player = Rectangle(rect:Rect(), fillMode:.fill)
     var canvasSize = Size()
     var playerSize = Size(width: 50, height: 50)
     let velocity = 25
+
+    let hearts = Hearts()
     
     init() {
         // Using a meaningful name can be helpful for debugging
-        super.init(name: "Player")
+        super.init(name: "PlayerAS")
     }
 
     override func setup(canvasSize: Size, canvas: Canvas) {
@@ -21,21 +23,24 @@ class Player: RenderableEntity, KeyDownHandler {
     }
     
     override func render(canvas:Canvas) {
-        canvas.render(FillStyle(color: Color(.orange)), player)
-    }
 
+    
+        canvas.render(FillStyle(color: Color(.black)), player)
+    }
+    
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
-        switch key
-        {
+        if hearts.playerLives > 0{
+            switch key
+            {
             case "a":
                 if (willStayInCanvas(player.rect.topLeft.x - velocity)) {move(-velocity)}
             case "d":
                 if (willStayInCanvas(player.rect.topRight.x + velocity)) {move(velocity)}
             default: 
                 print(key)
+            }
         }
     }
-    
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
@@ -47,4 +52,9 @@ class Player: RenderableEntity, KeyDownHandler {
     func willStayInCanvas(_ futurePosition: Int) -> Bool {
         return futurePosition > 0 && futurePosition < canvasSize.width
     }
+    
+    override func boundingRect() -> Rect {
+        return player.rect
+    }
+ 
 }

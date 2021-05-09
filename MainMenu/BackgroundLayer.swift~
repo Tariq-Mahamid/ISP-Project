@@ -15,13 +15,7 @@ class BackgroundLayer : Layer {
           super.init(name:"Background")
 
           // We insert our RenderableEntities in the constructor
-          insert(entity:Apple(appleSpawnNumber: 1), at:.back)
-          insert(entity:Apple(appleSpawnNumber: 2), at:.back)
-          insert(entity:Apple(appleSpawnNumber: 3), at:.back)
-          insert(entity:Garbage(garbageSpawnNumber: 1), at:.back)
-          insert(entity:Garbage(garbageSpawnNumber: 2), at:.back)
-          insert(entity:Garbage(garbageSpawnNumber: 3), at:.back)
-          insert(entity:background, at:.back)
+//          insert(entity:background, at:.back)
           insert(entity:Player(), at:.front)
       }
   }
