@@ -7,6 +7,8 @@ class Player: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var playerSize = Size(width: 50, height: 50)
     var velocity = 0
     var canvasWidth = 1500
+    var isProjectileInHand = true
+    var gameEnded = false
 
     let projectile = Projectile()
     
@@ -28,25 +30,33 @@ class Player: RenderableEntity, KeyDownHandler, KeyUpHandler {
     }
 
     override func render(canvas:Canvas) {
-        canvas.render(FillStyle(color: Color(.orange)), player)
+        if !gameEnded {
+            canvas.render(FillStyle(color: Color(.orange)), player)
 
-        if (player.rect.bottomRight.x + velocity) <= (canvasWidth - 50)  && player.rect.bottomLeft.x + velocity >= 50{
-            player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
+            if isProjectileInHand {
+                if (player.rect.bottomRight.x + velocity) <= (canvasWidth - 50)  && player.rect.bottomLeft.x + velocity >= 50{
+                    player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
+                }
+            }
         }
     }
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
-        switch key
-        {
-        case "d":
-            velocity = 14
+        if isProjectileInHand {
+            switch key
+            {
+            case "d":
+                if isProjectileInHand {
+                    velocity = 14
+                }
 
-        case "a":
-            velocity = -14
-//        case "d":
-  //          projectile.fire()
-        default:
-            print(key)
+            case "a":
+                if isProjectileInHand {
+                    velocity = -14
+                }
+            default:
+                print(key)
+            }
         }
     }
 

@@ -12,6 +12,8 @@ class InteractionLayer : Layer {
     let player = Player()
     let target = Target()
     let background = Background()
+    let endScreen = EndScreen()
+    
     var canvasWidth = 2000
     var canvasHeight = 1000
     var score = 0
@@ -32,6 +34,7 @@ class InteractionLayer : Layer {
         insert(entity:projectile, at:.front)
         insert(entity:player, at:.front)
         insert(entity:target, at:.front)
+        insert(entity:endScreen, at:.front)
     }
 
     override func preSetup(canvasSize: Size, canvas: Canvas) {
@@ -46,18 +49,38 @@ class InteractionLayer : Layer {
     }
     
     override func postCalculate(canvas: Canvas) {
+
+        if background.totalTime == 0 {
+            target.gameEnded = true
+            player.gameEnded = true
+            projectile.gameEnded = true
+            endScreen.gameEnded = true
+        }
+
+        if projectile.velocityY == 0 {
+            projectile.ellipse.center = player.player.rect.topRight
+        }
+        
         if projectile.ellipse.center.y - 25 < 0 {
             returnProjectileToPlayer()
             projectile.velocityY = 0
-            projectile.velocity = player.velocity
         }
+        
         background.score = score
-
+        endScreen.score = score
+        
         if (checkContainment()) {
             randomizeTargetLocation()
             score += 1
-            projectile.velocityY = 0
             returnProjectileToPlayer()
+        }
+
+        if projectile.ellipse.center == player.player.rect.topRight{
+            player.isProjectileInHand = true
+        }
+        
+        if projectile.velocityY != 0 {
+            player.isProjectileInHand = false
         }
     }
 
