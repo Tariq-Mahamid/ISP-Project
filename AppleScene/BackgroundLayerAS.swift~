@@ -7,11 +7,11 @@ class BackgroundLayerAS : Layer {
     let background = BackgroundAS()
     let apples = [Apple(appleSpawnNumber: 1), Apple(appleSpawnNumber: 2), Apple(appleSpawnNumber: 3)]
     let garbages = [Garbage(garbageSpawnNumber: 1), Garbage(garbageSpawnNumber: 2), Garbage(garbageSpawnNumber: 3)]
-    let player = PlayerAS()
-
-    let hearts = Hearts()
     
+    let player = PlayerAS()
+    let hearts = Hearts()
     let scoreboard = Scoreboard()
+    let endScreen = EndScreen()
     
       init() {
           // Using a meaningful name can be helpful for debugging
@@ -32,12 +32,25 @@ class BackgroundLayerAS : Layer {
           insert(entity:scoreboard, at:.back)
           insert(entity:background, at:.back)
           insert(entity:hearts, at:.front)
+          insert(entity:endScreen, at:.front)
 
       }
 
       override func postCalculate(canvas: Canvas){
           if let canvasSize = canvas.canvasSize{
               checkForContainment(canvasSize)
+          }
+
+          if hearts.playerLives == 0 {
+              for i in 0 ..< apples.count {
+                  apples[i].gameEnded = true
+              }
+              for i in 0 ..< garbages.count {
+                  garbages[i].gameEnded = true
+              }
+              player.gameEnded = true
+              hearts.gameEnded = true
+              scoreboard.gameEnded = true
           }
       }
 
@@ -55,8 +68,8 @@ class BackgroundLayerAS : Layer {
               let isTouchingApple = appleContainment.contains(.overlapsTop) && !appleContainment.contains(.beyondHorizontally)
           
               if (hearts.playerLives > 0 && isTouchingGarbage) {
-                 
-                      
+                  print(hearts.playerLives)
+                  
                   garbages[currentObject].resetPosition(canvasSize) 
                   
                   //print(hearts.playerLives)    

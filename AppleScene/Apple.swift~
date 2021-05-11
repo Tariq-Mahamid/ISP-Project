@@ -4,7 +4,7 @@ import Scenes
 class Apple : RenderableEntity{
 
 
-    
+    let hearts = Hearts()
     var apple = Rectangle(rect: Rect())
     let velocity = 7
     var appleSize = Size(width: 50, height: 50)
@@ -33,6 +33,8 @@ class Apple : RenderableEntity{
     }
 
     public func resetPosition(_ canvasSize: Size) {
+        print(hearts.playerLives)
+
         apple.rect.topLeft = generateSpawnPoint(canvasSize)
     }
     

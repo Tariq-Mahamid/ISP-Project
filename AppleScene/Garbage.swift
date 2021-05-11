@@ -2,14 +2,13 @@ import Igis
 import Scenes
 
 class Garbage : RenderableEntity{
-    
 
     var garbage : Rectangle
     var velocity = 7
     var garbageSize : Size
     var garbageSpawnNumber = 1
     let scoreboard = Scoreboard()
-
+    var gameEnded = false
 
     init(garbageSpawnNumber: Int) {
         garbageSize = Size(width: 50, height: 50)
@@ -20,14 +19,15 @@ class Garbage : RenderableEntity{
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
+
         garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill)
 
     }
     
     override func render(canvas: Canvas){
-
-            canvas.render(FillStyle(color: Color(.darkgreen)), garbage)
- 
+        if !gameEnded {
+            canvas.render(FillStyle(color: Color(.gray)), garbage)
+        } 
     }
     
     override func calculate(canvasSize: Size){

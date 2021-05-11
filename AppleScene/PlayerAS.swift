@@ -1,11 +1,12 @@
 import Igis
 import Scenes
 
-class PlayerAS: RenderableEntity, KeyDownHandler {
+class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var player = Rectangle(rect:Rect(), fillMode:.fill)
     var canvasSize = Size()
     var playerSize = Size(width: 50, height: 50)
-    let velocity = 25
+    var velocity = 0
+    var gameEnded = false
 
     let hearts = Hearts()
     
@@ -16,7 +17,8 @@ class PlayerAS: RenderableEntity, KeyDownHandler {
 
     override func setup(canvasSize: Size, canvas: Canvas) {
         dispatcher.registerKeyDownHandler(handler: self)
-
+        dispatcher.registerKeyUpHandler(handler: self)
+        
         player = Rectangle(rect: Rect(topLeft: Point(x: Int(canvasSize.width / 2) - Int(playerSize.width / 2), y: canvasSize.height - playerSize.height), size: playerSize), fillMode: .fill)
         
         self.canvasSize = canvasSize
@@ -24,25 +26,44 @@ class PlayerAS: RenderableEntity, KeyDownHandler {
     
     override func render(canvas:Canvas) {
 
-    
-        canvas.render(FillStyle(color: Color(.black)), player)
+        if !gameEnded {
+            canvas.render(FillStyle(color: Color(.black)), player)
+            
+            if (player.rect.bottomRight.x + velocity) <= canvasSize.width  && player.rect.bottomLeft.x + velocity >= 0{
+                player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
+            }
+        }
+
     }
     
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
-        if hearts.playerLives > 0{
-            switch key
-            {
-            case "a":
-                if (willStayInCanvas(player.rect.topLeft.x - velocity)) {move(-velocity)}
-            case "d":
-                if (willStayInCanvas(player.rect.topRight.x + velocity)) {move(velocity)}
-            default: 
-                print(key)
-            }
+
+        switch key
+        {
+        case "d":
+            velocity = 14
+        case "a":
+            velocity = -14
+        default:
+            print(key)
+
         }
     }
+
+    func onKeyUp(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+        switch key {
+        case "d":
+            velocity = 0
+        case "a":
+            velocity = 0
+        default:
+            print(key)
+        }
+    }
+    
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
+        dispatcher.unregisterKeyUpHandler(handler: self)
     }
     
     func move(_ addX: Int) {

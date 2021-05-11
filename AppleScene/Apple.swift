@@ -9,10 +9,10 @@ class Apple : RenderableEntity{
     let velocity = 7
     var appleSize = Size(width: 50, height: 50)
     var appleSpawnNumber = 1
+    var gameEnded = false
     
     init(appleSpawnNumber: Int) {
         self.appleSpawnNumber = appleSpawnNumber 
-        
         super.init(name: "Apple")
     }
 
@@ -20,8 +20,10 @@ class Apple : RenderableEntity{
         apple = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, appleSpawnNumber: appleSpawnNumber), size: appleSize), fillMode: .fill)
     }
     
-    override func render(canvas: Canvas){                        
+    override func render(canvas: Canvas){
+        if !gameEnded {
             canvas.render(FillStyle(color: Color(.red)), apple)
+        }
     }
     
     override func calculate(canvasSize: Size){
