@@ -1,0 +1,6 @@
+import Igis
+import Scenes
+
+class AimingScene : Scene {
+
+}
