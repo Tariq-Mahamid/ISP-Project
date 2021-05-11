@@ -20,10 +20,10 @@ class Background : RenderableEntity {
 
     init() {
         // Using a meaningful name can be helpful for debugging
-        guard let whitehouseURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/main/NarutoGameAimingSceneBackground.jpeg?raw=true") else {
+        guard let imageURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/main/NarutoGameAimingSceneBackground.jpeg?raw=true") else {
             fatalError("Failed to create URL for whitehouse")
         }
-        backgroundImage = Image(sourceURL:whitehouseURL)
+        backgroundImage = Image(sourceURL:imageURL)
         
         super.init(name:"Background")
     }

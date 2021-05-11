@@ -13,9 +13,9 @@ class MainScene : Scene {
        One for the background, one for interaction,
        and one for the foreground.
      */
-    let backgroundLayer = BackgroundLayer()
-    let interactionLayer = InteractionLayer()
-    let foregroundLayer = ForegroundLayer()
+    let backgroundLayer = BackgroundLayerAS()
+    let interactionLayer = InteractionLayerAS()
+    let foregroundLayer = ForegroundLayerAS()
 
     init() {
         // Using a meaningful name can be helpful for debugging
