@@ -7,7 +7,6 @@ class Target: RenderableEntity {
     let strokeStyle = StrokeStyle(color:Color(.red))
     let fillStyle = FillStyle(color:Color(.white))
     let lineWidth = LineWidth(width:10)
-    var gameEnded = false
 
     override func setup(canvasSize: Size, canvas: Canvas) {
         // Position the ellipse at the center of the canvas
@@ -15,11 +14,9 @@ class Target: RenderableEntity {
     }
 
     override func render(canvas:Canvas) {
-        if !gameEnded {
-            //        canvas.render(strokeStyle, FillStyle(color:Color(.red)))
-            canvas.render(strokeStyle, fillStyle, lineWidth, targetEllipse)
-            //        bullseyeEllipse.center = targetEllipse.center
-        }
+//        canvas.render(strokeStyle, FillStyle(color:Color(.red)))
+        canvas.render(strokeStyle, fillStyle, lineWidth, targetEllipse)
+//        bullseyeEllipse.center = targetEllipse.center
     }
 
     override func boundingRect() -> Rect {  

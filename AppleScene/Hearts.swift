@@ -15,6 +15,7 @@ class Hearts : RenderableEntity {
     var endValue = 0
     let scoreColor = FillStyle(color:Color(.red))
 
+    var gameEnded = false
  
     init () {
         
@@ -47,31 +48,33 @@ class Hearts : RenderableEntity {
   
 
    }
-    override func render(canvas:Canvas) {
-        livesValueText.text = String(playerLives)
-        canvas.render(scoreColor, livesText, livesValueText)
-        
-        if playerLives <= 0{
+   override func render(canvas:Canvas) {
+       if !gameEnded {
+           livesValueText.text = String(playerLives)
+           canvas.render(scoreColor, livesText, livesValueText)
+           
+           if playerLives <= 0{
 
-       //     playerStats().health += (XP) -> gerardo need to explain his jank code
-            
-      //            
-    //        endText.text = "GAME OVER XP Earned: \(endValue), \r\n press m to return to Main Menu"
-    //        endValueText.text = String(endValue)
-            canvas.render(scoreColor, endText)
-        }
-      
-        if let canvasSize = canvas.canvasSize {
-            for x in 0 ..< playerLives {
-                let currentHeartRect = Rect(topLeft: Point(x: canvasSize.width - ((5 - x) * heartSize.width) , y: heartSize.height / 2), size: heartSize)
-                let currentHeartRectangle = Rectangle(rect: currentHeartRect, fillMode: .fillAndStroke)
-                
-                canvas.render(FillStyle(color: Color(.orange)), currentHeartRectangle)
-            }
-        }
+               //     playerStats().health += (XP) -> gerardo need to explain his jank code
+               
+               //            
+               //        endText.text = "GAME OVER XP Earned: \(endValue), \r\n press m to return to Main Menu"
+               //        endValueText.text = String(endValue)
+               canvas.render(scoreColor, endText)
+           }
+           
+           if let canvasSize = canvas.canvasSize {
+               for x in 0 ..< playerLives {
+                   let currentHeartRect = Rect(topLeft: Point(x: canvasSize.width - ((5 - x) * heartSize.width) , y: heartSize.height / 2), size: heartSize)
+                   let currentHeartRectangle = Rectangle(rect: currentHeartRect, fillMode: .fillAndStroke)
+                   
+                   canvas.render(FillStyle(color: Color(.orange)), currentHeartRectangle)
+               }
+           }
+       }
     }
 
-    
+/*    
     private func playerStats() -> PlayerStats {
         guard let playerStats = scene as? PlayerStats else {
             fatalError("playerStats of type PlayerStats is required")
@@ -79,6 +82,8 @@ class Hearts : RenderableEntity {
         return playerStats
     }
 
+    
+ */
     
      
     

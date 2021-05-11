@@ -8,6 +8,7 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
     let lineWidth = LineWidth(width:1)
     var canvasHeight = 1000
     var canvasWidth = 2000
+    var gameEnded = false
     
     // Velocity to move with player
     var velocity = 0
@@ -31,18 +32,19 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
     }
 
     override func render(canvas:Canvas) {
-        canvas.render(fillStyle, strokeStyle, lineWidth, ellipse)
-        
-        if ellipse.center.x + velocity + 50 <= canvasWidth && ellipse.center.x + velocity - 100 >= 0{
-            ellipse.center = Point(x: ellipse.center.x + velocity, y: ellipse.center.y)
+        if !gameEnded {
+            canvas.render(fillStyle, strokeStyle, lineWidth, ellipse)
+            
+            if ellipse.center.x + velocity + 50 <= canvasWidth && ellipse.center.x + velocity - 100 >= 0{
+                ellipse.center = Point(x: ellipse.center.x + velocity, y: ellipse.center.y)
+            }
+
+            ellipse.center = Point(x: ellipse.center.x , y: ellipse.center.y + velocityY)
+
+            if velocityY != 0 {
+                velocity = 0
+            }
         }
-
-        ellipse.center = Point(x: ellipse.center.x , y: ellipse.center.y + velocityY)
-
-        if velocityY != 0 {
-            velocity = 0
-        }
-
     }
 
     override func boundingRect() -> Rect {
@@ -51,16 +53,20 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
     }
     
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+
         switch key
         {
+            /*
         case "d":
             if velocityY == 0 {
                 velocity = 14
             }
         case "a":
+            
             if velocityY == 0 {
                 velocity = -14
             }
+             */
         case "w":
             fire()
         default:
@@ -69,6 +75,7 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
     }
 
     func onKeyUp(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+        /*
         switch key {
         case "d":
             velocity = 0
@@ -77,6 +84,8 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
         default:
             print(key)
         }
+        
+         */
     }
 
     
