@@ -1,0 +1,36 @@
+import Igis
+import Scenes
+
+enum GameWinner {case none, player, enemy}
+
+class GameoverScreen : RenderableEntity {
+
+    public var currentWinner = GameWinner.none
+    
+    init() {
+        super.init(name: "GameoverScreen")
+    }
+
+    override func render(canvas: Canvas) {
+
+        if let canvasSize = canvas.canvasSize {
+            if (foregroundLayer().gameOver) {
+                let rectangle = Rectangle(rect: Rect(topLeft: Point(x: canvasSize.width / 3, y: canvasSize.height / 4),
+                                                     size: Size(width: canvasSize.width / 3, height: canvasSize.height / 2)),
+                                          fillMode: .fillAndStroke)
+                let gameOverText = Text(location: Point(x: canvasSize.width / 2, y: ((canvasSize.height * 2) / 3) - 10), text: "Null")
+                gameOverText.text = currentWinner == GameWinner.player ? "You Win!" : "You Lose :("
+
+                canvas.render(LineWidth(width: 3), StrokeStyle(color: Color(.black)), FillStyle(color: Color(.gray)), rectangle)
+                canvas.render(FillStyle(color: Color(.black)), gameOverText)
+            }
+        }
+    }
+
+    private func foregroundLayer() -> ForegroundLayer {
+        guard let mainScene = scene as? MainScene else {
+            fatalError("mainScene of type MainScene is required")
+        }
+        return mainScene.foregroundLayer
+    }
+}
