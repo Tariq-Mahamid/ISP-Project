@@ -6,15 +6,12 @@ import Scenes
    */
 
 
-class ForegroundLayerMS : Layer {
-
-    let endScreen = EndScreenMS()
-
+class ForegroundLayer : Layer {
+    
       init() {
           // Using a meaningful name can be helpful for debugging
-          super.init(name:"ForegroundMS")
+          super.init(name:"Foreground")
 
           // We insert our RenderableEntities in the constructor
-          insert(entity:endScreen, at:.front)
       }
   }

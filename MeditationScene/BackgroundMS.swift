@@ -7,7 +7,7 @@ import Foundation
    */
 
 
-class Background : RenderableEntity {
+class BackgroundMS : RenderableEntity {
     let player = Player()
     var score = 0
     var lives = 5
@@ -28,7 +28,7 @@ class Background : RenderableEntity {
         }
         backgroundImage = Image(sourceURL:imageURL)
 
-          super.init(name:"Background")
+          super.init(name:"BackgroundMS")
       }
 
       func clearCanvas(canvas:Canvas) {
