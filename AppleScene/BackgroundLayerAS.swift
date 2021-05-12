@@ -11,7 +11,7 @@ class BackgroundLayerAS : Layer {
     let player = PlayerAS()
     let hearts = Hearts()
     let scoreboard = Scoreboard()
-    let endScreen = EndScreen()
+    let endScreen = EndScreenAS()
     
       init() {
           // Using a meaningful name can be helpful for debugging
