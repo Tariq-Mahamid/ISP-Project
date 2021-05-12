@@ -12,7 +12,7 @@ class InteractionLayerMS : Layer, KeyDownHandler{
     let player = PlayerMS()
     let block1 = TimingBlockMS()
     let block2 = TimingBlockMS()
-    let block3 = TimingBlockMS()
+    let block3 = TimingBlocMSk()
     let block4 = TimingBlockMS()
     let block5 = TimingBlockMS()
     let block6 = TimingBlockMS()
