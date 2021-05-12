@@ -6,7 +6,7 @@ import Scenes
    */
 
 
-class ForegroundLayerAim : Layer {
+class ForegroundLayer : Layer {
     
       init() {
           // Using a meaningful name can be helpful for debugging

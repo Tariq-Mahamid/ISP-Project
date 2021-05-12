@@ -19,15 +19,15 @@ class Garbage : RenderableEntity{
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
-        if !gameEnded {
-            garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill)
-        }
+
+        garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill)
+
     }
     
     override func render(canvas: Canvas){
-
+        if !gameEnded {
             canvas.render(FillStyle(color: Color(.gray)), garbage)
- 
+        } 
     }
     
     override func calculate(canvasSize: Size){

@@ -9,10 +9,10 @@ import Igis
 class InteractionLayerAim : Layer {
 
     let projectile = Projectile()
-    let player = PlayerAim()
+    let player = Player()
     let target = Target()
-    let background = BackgroundAim()
-    let endScreen = EndScreenAim()
+    let background = Background()
+    let endScreen = EndScreen()
     
     var canvasWidth = 2000
     var canvasHeight = 1000

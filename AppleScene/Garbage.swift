@@ -4,14 +4,14 @@ import Scenes
 class Garbage : RenderableEntity{
 
     var garbage : Rectangle
-    var velocity = 7
+    var velocity = 14
     var garbageSize : Size
     var garbageSpawnNumber = 1
     let scoreboard = Scoreboard()
     var gameEnded = false
 
     init(garbageSpawnNumber: Int) {
-        garbageSize = Size(width: 50, height: 50)
+        garbageSize = Size(width: 250, height: 250)
         self.garbageSpawnNumber = garbageSpawnNumber
         garbage = Rectangle(rect: Rect())
         
