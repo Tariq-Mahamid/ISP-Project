@@ -1,7 +1,7 @@
 import Igis
 import Scenes
 
-class Player: RenderableEntity{
+class PlayerMS: RenderableEntity{
     var player: Rectangle
     let playerCenter = 100
     var canvasSize = Size()

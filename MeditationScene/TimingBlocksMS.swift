@@ -1,7 +1,7 @@
 import Igis
 import Scenes
 
-class TimingBlock: RenderableEntity, KeyDownHandler {
+class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var block = Rectangle(rect: Rect())
     var velocity = 0
     var defaultVelocity = 12

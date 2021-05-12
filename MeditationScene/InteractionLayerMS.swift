@@ -7,17 +7,17 @@ import Igis
    */
 
 
-class InteractionLayer : Layer, KeyDownHandler{
+class InteractionLayerMS : Layer, KeyDownHandler{
 
-    let player = Player()
-    let block1 = TimingBlock()
-    let block2 = TimingBlock()
-    let block3 = TimingBlock()
-    let block4 = TimingBlock()
-    let block5 = TimingBlock()
-    let block6 = TimingBlock()
-    let block7 = TimingBlock()
-    let block8 = TimingBlock()
+    let player = PlayerMS()
+    let block1 = TimingBlockMS()
+    let block2 = TimingBlockMS()
+    let block3 = TimingBlocMSk()
+    let block4 = TimingBlockMS()
+    let block5 = TimingBlockMS()
+    let block6 = TimingBlockMS()
+    let block7 = TimingBlockMS()
+    let block8 = TimingBlockMS()
 
     var arrayOfBlocks = [TimingBlock]()
     var canvasSizeWidth = 0
@@ -25,7 +25,7 @@ class InteractionLayer : Layer, KeyDownHandler{
     init() {
         
         // Using a meaningful name can be helpful for debugging
-        super.init(name:"Interaction")
+        super.init(name:"InteractionMS")
         
         arrayOfBlocks = [block1, block2, block3, block4]
         
