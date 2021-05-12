@@ -17,8 +17,8 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         super.init(name: "TimingBlock")
     }
 
-    func background() -> BackgroundMS {
-        guard let mainScene = scene as? MeditationScene else {
+    func background() -> Background {
+        guard let mainScene = scene as? MainScene else {
             fatalError("mainScene of type MainScene is required")
         }
         let backgroundLayer = mainScene.backgroundLayer

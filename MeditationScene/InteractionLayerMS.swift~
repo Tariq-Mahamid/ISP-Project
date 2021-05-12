@@ -19,7 +19,7 @@ class InteractionLayerMS : Layer, KeyDownHandler{
     let block7 = TimingBlockMS()
     let block8 = TimingBlockMS()
 
-    var arrayOfBlocks = [TimingBlockMS]()
+    var arrayOfBlocks = [TimingBlock]()
     var canvasSizeWidth = 0
 
     init() {
