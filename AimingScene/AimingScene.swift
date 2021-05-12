@@ -14,9 +14,9 @@ class AimingScene : Scene {
        One for the background, one for interaction,
        and one for the foreground.
      */
-    let backgroundLayer = BackgroundLayerAS()
-    let interactionLayer = InteractionLayerAS()
-    let foregroundLayer = ForegroundLayerAS()
+    let backgroundLayer = BackgroundLayerAim()
+    let interactionLayer = InteractionLayerAim()
+    let foregroundLayer = ForegroundLayerAim()
 
     init() {
         // Using a meaningful name can be helpful for debugging
@@ -27,7 +27,6 @@ class AimingScene : Scene {
         insert(layer:backgroundLayer, at:.back)
         insert(layer:interactionLayer, at:.inFrontOf(object:backgroundLayer))
         insert(layer:foregroundLayer, at:.front)
-      //  insert(layer:ExitSceneAS(), at:.back)
     }
 }
 
