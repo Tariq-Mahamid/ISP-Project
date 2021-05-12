@@ -2,7 +2,7 @@ import Igis
 import Scenes
 
 
-class EndScreenMS : RenderableEntity{
+class EndScreen : RenderableEntity{
     var endScreen = Rectangle(rect: Rect())
     var endScreenWidth : Int
     var endScreenHeight : Int
@@ -20,8 +20,8 @@ class EndScreenMS : RenderableEntity{
         endScreenHeight = 400
     }
 
-    func background() -> BackgroundMS {
-        guard let mainScene = scene as? MeditationScene else {
+    func background() -> Background {
+        guard let mainScene = scene as? MainScene else {
             fatalError("mainScene of type MainScene is required")
         }
         let backgroundLayer = mainScene.backgroundLayer

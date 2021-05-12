@@ -31,26 +31,15 @@ class PlayerMS: RenderableEntity{
         }
     }
     
-    func background() -> Background {
-        guard let mainScene = scene as? MainScene else {
+    func background() -> BackgroundMS{
+        guard let mainScene = scene as? MeditationScene else {
             fatalError("mainScene of type MainScene is required")
         }
         let backgroundLayer = mainScene.backgroundLayer
         let background = backgroundLayer.background
         return background
     }
-
-/*    
-    func timingBlocks() -> TimingBlocks {
-        guard let mainScene = scene as? MainScene else {
-            fatalError("mainScene of type MainScene is required")
-        }
-        let backgroundLayer = mainScene.backgroundLayer
-//        let timingBlocks = backgroundLayer.timingBlocks
-//        return timingBlocks
-    }
     
- */
     override func boundingRect() -> Rect
     {
         let boundingRect = player.rect

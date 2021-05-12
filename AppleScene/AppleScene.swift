@@ -27,6 +27,5 @@ class AppleScene : Scene {
         insert(layer:backgroundLayer, at:.back)
         insert(layer:interactionLayer, at:.inFrontOf(object:backgroundLayer))
         insert(layer:foregroundLayer, at:.front)
-        insert(layer:ExitSceneAS(), at:.back)
     }
 }

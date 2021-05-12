@@ -11,13 +11,8 @@ class Player: RenderableEntity, KeyDownHandler {
     var ImagePlayerTwo : Image
     var addend:Int = 0
     var addendy:Int = 0
-    var canvasSize = Size()
 
-    var specificCanvasWidth = 0
-    var x = 0
-    var y = 0
-    var leftAnimation = false
-    
+
     var leftTrue = 0
     init() {
         // Using a meaningful name can be helpful for debugging
@@ -39,39 +34,52 @@ class Player: RenderableEntity, KeyDownHandler {
         canvas.setup(ImagePlayerOne)
         canvas.setup(ImagePlayerTwo)
         
-        self.canvasSize = canvasSize
+        let specificCanvasWidth = 480*(canvasSize.height)/272
+        let canvasHeight = canvasSize.height
+        let canvasWidth = canvasSize.width
+        let x = (canvasWidth/2)-(specificCanvasWidth/2)
+        let y = canvasHeight/2 - canvasSize.height/2
+        
         player = Rectangle(rect: Rect(topLeft: Point(x: (Int(specificCanvasWidth / 2)+x) - Int(playerSize.width / 2), y: Int((canvasSize.height / 2)+y) - Int(playerSize.height / 2)), size: (playerSize)), fillMode: .stroke)
         self.canvasSize = canvasSize
-
-        specificCanvasWidth = (480*canvasSize.height)/272
-
-        x = (canvasSize.width/2)-(specificCanvasWidth/2)
-        y = (canvasSize.height/2) - (canvasSize.height/2)
     }
     
     override func render(canvas:Canvas) {
+       // let specificCanvasWidth = 480*(canvasSize.height)/272    
+        
+        
+      //  let x = (canvasWidth/2)-(specificCanvasWidth/2)
+      //  let y = canvasHeight/2 - canvasSize.height/2
+        
         if let canvasSize = canvas.canvasSize {
-            
+             
             let isTouchingLeft = player.rect.topLeft.x < 10
             let isTouchingTop = player.rect.topRight.y < 10
-            let isTouchingRight = player.rect.topRight.x > canvasSize.width - 10
-            let isTouchingBottom = player.rect.bottomRight.y > canvasSize.height - 10
+            let isTouchingRight = player.rect.topRight.x > canvas.canvasSize.width - 10
+            let isTouchingBottom = player.rect.bottomRight.y > canvas.canvasSize.height - 10
               
             if(isTouchingTop){
+                //            canvas.render(lineWidth, player)
                 director.enqueueScene(scene:AppleScene())
                 director.transitionToNextScene()
+                
+                
+                
             }else if(isTouchingRight){
                 director.enqueueScene(scene:FightScene())
                 director.transitionToNextScene()
             }
             else if(isTouchingBottom){
-                director.enqueueScene(scene:AimingScene())
+                director.enqueueScene(scene:FightScene())
                 director.transitionToNextScene()
+                
+                
             }else if(isTouchingLeft){
-                director.enqueueScene(scene:MeditationScene())
-                director.transitionToNextScene() 
-            }
-            if ImagePlayerOne.isReady && leftAnimation{
+                director.enqueueScene(scene:Scene())
+                director.transitionToNextScene()
+        }
+
+            if ImagePlayerOne.isReady && leftTrue%2 != 0{
                 let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
                 let destinationRect = Rect(topLeft:Point(x:(Int((specificCanvasWidth/2)+x+addend)-Int(playerSize.width/2)),y: Int((canvasSize.height/2)+y+addendy) - Int(playerSize.height / 2)), size:Size(width:200, height:206))
 
@@ -79,7 +87,7 @@ class Player: RenderableEntity, KeyDownHandler {
                 
                 canvas.render(ImagePlayerOne)
             }
-            if ImagePlayerTwo.isReady && !leftAnimation{
+            if ImagePlayerTwo.isReady && leftTrue%2 == 0 {
                 let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
                 let destinationRect = Rect(topLeft:Point(x:(Int((specificCanvasWidth/2)+x+addend)-Int(playerSize.width/2)),y: Int((canvasSize.height/2)+y+addendy) - Int(playerSize.height / 2)), size:Size(width:200, height:206))
                 
@@ -88,7 +96,6 @@ class Player: RenderableEntity, KeyDownHandler {
                 canvas.render(ImagePlayerTwo)
             }
         }
-        leftAnimation = !leftAnimation
     }
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         switch key
