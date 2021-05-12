@@ -6,7 +6,7 @@ import Scenes
    A Scene is comprised of one or more Layers.
    Layers are generally added in the constructor.
  */
-class MainScene : Scene {
+class MainSceneAS : Scene {
 
     /* Scenes typically include one or more Layers.
        A common approach is to use three Layers:
