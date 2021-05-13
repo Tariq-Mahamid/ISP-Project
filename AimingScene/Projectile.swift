@@ -1,17 +1,14 @@
 import Scenes
 import Igis
-import Foundation
 
 class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
-    let ellipse = Ellipse(center:Point(x:0, y:0), radiusX:25, radiusY:25)
-//    let strokeStyle = StrokeStyle(color:Color(.burlywood))
-//    let fillStyle = FillStyle(color:Color(.gray))
-    let lineWidth = LineWidth(width:0)
+    let ellipse = Ellipse(center:Point(x:0, y:0), radiusX:25, radiusY:25, fillMode:.fillAndStroke)
+    let strokeStyle = StrokeStyle(color:Color(.gray))
+    let fillStyle = FillStyle(color:Color(.gray))
+    let lineWidth = LineWidth(width:1)
     var canvasHeight = 1000
     var canvasWidth = 2000
     var gameEnded = false
-
-    let backgroundImage : Image
     
     // Velocity to move with player
     var velocity = 0
@@ -21,11 +18,6 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
     
     init() {
         // Using a meaningful name can be helpful for debugging
-        guard let whitehouseURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/NarutoGameShuriken.png?raw=true") else {
-            fatalError("Failed to create URL for whitehouse")
-        }
-        backgroundImage = Image(sourceURL:whitehouseURL)
-        
         super.init(name:"Ball")
     }
 
@@ -37,26 +29,17 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
         canvasWidth = canvasSize.width
         ellipse.center.x = canvasWidth/2 + 50
         ellipse.center.y = canvasSize.height - 100
-        canvas.setup(backgroundImage)
     }
 
     override func render(canvas:Canvas) {
         if !gameEnded {
-//            canvas.render(ellipse)
+            canvas.render(fillStyle, strokeStyle, lineWidth, ellipse)
             
             if ellipse.center.x + velocity + 50 <= canvasWidth && ellipse.center.x + velocity - 100 >= 0{
                 ellipse.center = Point(x: ellipse.center.x + velocity, y: ellipse.center.y)
             }
 
             ellipse.center = Point(x: ellipse.center.x , y: ellipse.center.y + velocityY)
-
-            if backgroundImage.isReady {
-//                                let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
-                let destinationRect = (Rect(topLeft:Point(x: ellipse.center.x - 25, y: ellipse.center.y - 25), size:Size(width:50, height:50)))
-                                backgroundImage.renderMode = .destinationRect(destinationRect)
-                canvas.render(backgroundImage)
-            }
-
 
             if velocityY != 0 {
                 velocity = 0

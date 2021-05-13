@@ -12,9 +12,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var scored = false
     var timed = false
     var gameEnded = false
-
-//    let backgroundImage : Image
-
+    
     init() {
         super.init(name: "TimingBlock")
     }
@@ -34,22 +32,20 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         fillStyle = FillStyle(color: Color(.gray))
         canvasWidth = canvasSize.width
         fillStyle = FillStyle(color: randomizeBlockColor())
-//        canvas.setup(backgroundImage)
     }
 
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
     
-    override func render(canvas:Canvas) {
+    override func render(canvas:Canvas) {        
+        if (gameEnded) {return}
         
         if background().lives == 0 {
             gameEnded = true
         }
 
-        if !gameEnded {
-            canvas.render(fillStyle, block)
-        }
+        canvas.render(fillStyle, block)
 
         if (75 > block.rect.bottomLeft.x && 75 < block.rect.bottomRight.x) || (125 > block.rect.bottomLeft.x && 125 < block.rect.bottomRight.x) {
             touchingPlayer = true
@@ -63,6 +59,8 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     }
     
     override func calculate(canvasSize: Size) {
+        if (gameEnded) {return}
+        
         block.rect.topLeft = Point(x:block.rect.topLeft.x - velocity, y:block.rect.topLeft.y)
         if block.rect.topLeft.x < -120 {
 
@@ -127,7 +125,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         let conditionsForScoringMet = isConditionsForScoringMet()
         let correctKey = associateKey()
-
+        
         switch code {
         case "KeyQ":
             if conditionsForScoringMet && (correctKey == "KeyQ") {
@@ -141,7 +139,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                 }
                 timed = true
             }
-            if gameEnded {
+            if gameEnded{
                 director.enqueueScene(scene: MainScene())
                 director.transitionToNextScene()
             }
@@ -181,11 +179,9 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                 }
                 timed = true
             }
-            if gameEnded {
-                if gameEnded {
-                    director.enqueueScene(scene: MeditationScene())
-                    director.transitionToNextScene()
-                }
+            if gameEnded{
+                director.enqueueScene(scene: MeditationScene())
+                director.transitionToNextScene()
             }
         default :
             print("Unspecified key has been pressed.")
