@@ -25,7 +25,7 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
             fatalError("Failed to create URL for whitehouse")
         }
         backgroundImage = Image(sourceURL:whitehouseURL)
-        
+
         super.init(name:"Ball")
     }
 

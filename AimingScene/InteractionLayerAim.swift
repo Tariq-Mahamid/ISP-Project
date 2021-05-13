@@ -31,9 +31,9 @@ class InteractionLayerAim : Layer {
 
         // We insert our RenderableEntities in the constructor
         insert(entity:background, at:.front)
-        insert(entity:projectile, at:.front)
         insert(entity:player, at:.front)
         insert(entity:target, at:.front)
+        insert(entity:projectile, at:.front)
         insert(entity:endScreen, at:.front)
     }
 
@@ -52,9 +52,9 @@ class InteractionLayerAim : Layer {
 
         if background.totalTime == 0 {
             target.gameEnded = true
-            player.gameEnded = true
             projectile.gameEnded = true
             endScreen.gameEnded = true
+            player.gameEnded = true
         }
 
         if projectile.velocityY == 0 {

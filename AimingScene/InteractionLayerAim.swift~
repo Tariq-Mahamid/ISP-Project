@@ -9,10 +9,10 @@ import Igis
 class InteractionLayerAim : Layer {
 
     let projectile = Projectile()
-    let player = Player()
+    let player = PlayerAim()
     let target = Target()
-    let background = Background()
-    let endScreen = EndScreen()
+    let background = BackgroundAim()
+    let endScreen = EndScreenAim()
     
     var canvasWidth = 2000
     var canvasHeight = 1000
@@ -31,9 +31,9 @@ class InteractionLayerAim : Layer {
 
         // We insert our RenderableEntities in the constructor
         insert(entity:background, at:.front)
-        insert(entity:projectile, at:.front)
         insert(entity:player, at:.front)
         insert(entity:target, at:.front)
+        insert(entity:projectile, at:.front)
         insert(entity:endScreen, at:.front)
     }
 
