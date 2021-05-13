@@ -1,23 +1,58 @@
 import Igis
 import Scenes
+import Foundation
 
 class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var player = Rectangle(rect:Rect(), fillMode:.fill)
     var canvasSize = Size()
-    var playerSize = Size(width: 50, height: 50)
+    var playerSize = Size(width: 100, height: 100)
     var velocity = 0
     var gameEnded = false
+   
+    var NarutoFacingLeft: Image
+    var NarutoFacingRight: Image
+    var NarutoWalkingRight: Image
+    var NarutoWalkingLeft: Image
 
-    let hearts = Hearts()
+    var renderRight = true
+    var renderLeft = false
+
+    var leftAnimation = false
     
+    let hearts = Hearts()
+        
     init() {
         // Using a meaningful name can be helpful for debugging
+        guard let NarutoFacingLeftURL = URL(string: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Left1.png?raw=true") else {
+            fatalError("Failed to create URL for NarutoFacingLeft")
+        } 
+        NarutoFacingLeft = Image(sourceURL:NarutoFacingLeftURL)
+
+        guard let NarutoFacingRightURL = URL(string: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Right1.png?raw=true") else {
+            fatalError("Failed to create URL for NarutoFacingForward")
+        } 
+        NarutoFacingRight = Image(sourceURL:NarutoFacingRightURL)
+
+        guard let NarutoWalkingLeftURL = URL(string: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Left2.png?raw=true") else {
+            fatalError("Failed to create URL for NarutoWalkingLeft")
+        } 
+        NarutoWalkingLeft = Image(sourceURL:NarutoWalkingLeftURL)
+
+        guard let NarutoWalkingRightURL = URL(string: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Right2.png?raw=true") else {
+            fatalError("Failed to create URL for NarutoWalkingRight")
+        } 
+        NarutoWalkingRight = Image(sourceURL:NarutoWalkingRightURL)
+        
         super.init(name: "PlayerAS")
     }
 
     override func setup(canvasSize: Size, canvas: Canvas) {
         dispatcher.registerKeyDownHandler(handler: self)
         dispatcher.registerKeyUpHandler(handler: self)
+        canvas.setup(NarutoFacingLeft)
+        canvas.setup(NarutoFacingRight)
+        canvas.setup(NarutoWalkingRight)
+        canvas.setup(NarutoWalkingLeft)
         
         player = Rectangle(rect: Rect(topLeft: Point(x: Int(canvasSize.width / 2) - Int(playerSize.width / 2), y: canvasSize.height - playerSize.height), size: playerSize), fillMode: .fill)
         
@@ -26,8 +61,38 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     
     override func render(canvas:Canvas) {
 
+        if abs(velocity) > 0 {
+            leftAnimation = !leftAnimation
+        }
+        
+        let destinationRect = Rect(topLeft: player.rect.topLeft, size: playerSize)
+
+         if renderRight {
+            if NarutoFacingRight.isReady && leftAnimation{
+                NarutoFacingRight.renderMode = .destinationRect(destinationRect)
+                
+                canvas.render(NarutoFacingRight)
+            }
+            else if NarutoWalkingRight.isReady && !leftAnimation{
+                NarutoWalkingRight.renderMode = .destinationRect(destinationRect)
+                
+                canvas.render(NarutoWalkingRight)    
+            }
+        } 
+        else if renderLeft {
+                if NarutoFacingLeft.isReady && leftAnimation{
+                    NarutoFacingLeft.renderMode = .destinationRect(destinationRect)
+                    
+                    canvas.render(NarutoFacingLeft)                
+                }
+                else if NarutoWalkingLeft.isReady && !leftAnimation{
+                    NarutoWalkingLeft.renderMode = .destinationRect(destinationRect)
+                    
+                    canvas.render(NarutoWalkingLeft)    
+                } 
+        }
+          
         if !gameEnded {
-            canvas.render(FillStyle(color: Color(.black)), player)
             
             if (player.rect.bottomRight.x + velocity) <= canvasSize.width  && player.rect.bottomLeft.x + velocity >= 0{
                 player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
@@ -42,8 +107,12 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
         {
         case "d":
             velocity = 14
+            turnOffRenders()
+            renderRight = true
         case "a":
             velocity = -14
+            turnOffRenders()
+            renderLeft = true
         case "q":
             if gameEnded {
                 director.enqueueScene(scene: MainScene())
@@ -60,6 +129,12 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
         }
     }
 
+     func turnOffRenders() {
+        renderRight = false
+        renderLeft = false
+    }
+   
+
     func onKeyUp(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         switch key {
         case "d":
@@ -70,7 +145,7 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
             print(key)
         }
     }
-    
+
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
         dispatcher.unregisterKeyUpHandler(handler: self)
@@ -87,5 +162,5 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     override func boundingRect() -> Rect {
         return player.rect
     }
- 
+    
 }
