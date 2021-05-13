@@ -1,7 +1,7 @@
 import Igis
 import Scenes
 
-class Player: RenderableEntity, KeyDownHandler, KeyUpHandler {
+class PlayerAim: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var player: Rectangle
     var canvasSize = Size()
     var playerSize = Size(width: 50, height: 50)

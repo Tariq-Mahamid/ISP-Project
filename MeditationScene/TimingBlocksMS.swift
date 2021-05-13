@@ -134,6 +134,10 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                 }
                 timed = true
             }
+            if gameEnded {
+                director.enqueueScene(scene: MainScene())
+                director.transitionToNextScene()
+            }
         case "KeyW":
             if conditionsForScoringMet && (correctKey == "KeyW") {
                 background().increaseScore()
@@ -169,6 +173,12 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                     background().decreaseLives()
                 }
                 timed = true
+            }
+            if gameEnded {
+                if gameEnded {
+                    director.enqueueScene(scene: MeditationScene())
+                    director.transitionToNextScene()
+                }
             }
         default :
             print("Unspecified key has been pressed.")
