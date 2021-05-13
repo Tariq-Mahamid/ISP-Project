@@ -44,6 +44,16 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
             velocity = 14
         case "a":
             velocity = -14
+        case "q":
+            if gameEnded {
+                director.enqueueScene(scene: MainScene())
+                director.transitionToNextScene()
+            }
+        case "r":
+            if gameEnded {
+                director.enqueueScene(scene: AppleScene())
+                director.transitionToNextScene()
+            }
         default:
             print(key)
 

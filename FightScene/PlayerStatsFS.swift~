@@ -27,13 +27,14 @@ class PlayerStatsFS : RenderableEntity {
         levelText = Text(location: Point(), text: "Level: " + String(level))
         levelText.font = "25pt Arial bold"
         levelText.alignment = .center
+
+        health = getPlayerStats().getHealth()
         
         super.init(name: "PlayerStats")    
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
         level = (getPlayerStats().getDamage() + getPlayerStats().getHealth() + getPlayerStats().getChakra()) / 3
-        health = getPlayerStats().getHealth()
         
         topLeft = isOpponent ? Point(x: canvasSize.width - size.width, y: 0) : Point()
         background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fill)

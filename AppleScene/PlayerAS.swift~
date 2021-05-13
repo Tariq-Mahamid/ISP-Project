@@ -6,6 +6,7 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var canvasSize = Size()
     var playerSize = Size(width: 50, height: 50)
     var velocity = 0
+    var gameEnded = false
 
     let hearts = Hearts()
     
@@ -25,10 +26,12 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     
     override func render(canvas:Canvas) {
 
-        canvas.render(FillStyle(color: Color(.black)), player)
-        
-        if (player.rect.bottomRight.x + velocity) <= canvasSize.width  && player.rect.bottomLeft.x + velocity >= 0{
-            player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
+        if !gameEnded {
+            canvas.render(FillStyle(color: Color(.black)), player)
+            
+            if (player.rect.bottomRight.x + velocity) <= canvasSize.width  && player.rect.bottomLeft.x + velocity >= 0{
+                player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
+            }
         }
 
     }

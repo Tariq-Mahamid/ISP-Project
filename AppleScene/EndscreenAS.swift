@@ -1,8 +1,7 @@
 import Igis
 import Scenes
 
-
-class EndScreen : RenderableEntity{
+class EndScreenAS : RenderableEntity{
     var endScreen = Rectangle(rect: Rect())
     var endScreenWidth : Int
     var endScreenHeight : Int
@@ -14,26 +13,25 @@ class EndScreen : RenderableEntity{
     
     var gameEnded = false
     var score = 0 //Should be retrieved before End Screen is rendered
-
+    var addScore = true
+    
     init() {
         endScreenWidth = 1100
         endScreenHeight = 400
     }
 
-    func backgroundAS() -> BackgroundAS {
-        guard let mainScene = scene as? MainScene else {
+    func background() -> BackgroundAS {
+        guard let mainScene = scene as? AppleScene else {
             fatalError("mainScene of type MainScene is required")
         }
-        let backgroundLayerAS = mainScene.backgroundLayer
-        let backgroundAS = backgroundLayerAS.background
-        return backgroundAS
+        let backgroundLayer = mainScene.backgroundLayer
+        let background = backgroundLayer.background
+        return background
     }
 
-    override func setup(canvasSize:Size, canvas: Canvas) {
-        
+    override func setup(canvasSize:Size, canvas: Canvas) {   
         endScreenSize = Size(width:endScreenWidth, height:endScreenHeight)
         endScreen = Rectangle(rect: Rect(topLeft: Point(x: (canvasSize.width/2 - endScreenWidth/2), y: (canvasSize.height/2 - endScreenHeight/2)), size: endScreenSize), fillMode: .fillAndStroke)
-
     }
 
     override func render(canvas:Canvas) {
@@ -47,6 +45,19 @@ class EndScreen : RenderableEntity{
         if gameEnded {
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
+            if addScore {
+                getPlayerStats().changeHealth(factor: score)
+
+                addScore = false
+            }
+            
         }
+    }
+    
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
+        }
+        return mainDirector.playerStats
     }
 }                          

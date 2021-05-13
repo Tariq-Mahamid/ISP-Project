@@ -1,0 +1,78 @@
+import Igis
+import Scenes
+
+class PlayerStatsView : RenderableEntity, KeyDownHandler {
+    var playerStatsRectangle = Rectangle(rect: Rect())
+    var playerSize = Size()
+    var topLeft = Point()
+
+    var healthText = Text(location: Point(), text: "Null")
+    var damageText = Text(location: Point(), text: "Null")
+    var chakraText = Text(location: Point(), text: "Null")
+    
+    var showStats = false
+    
+    init() {
+        super.init(name: "PlayerStatsView")
+    }
+
+    override func setup(canvasSize: Size, canvas: Canvas) {
+        playerSize = Size(width: canvasSize.width / 3, height: canvasSize.height / 3)
+        topLeft = Point(x: canvasSize.width / 3, y: canvasSize.height / 3)
+
+        dispatcher.registerKeyDownHandler(handler: self)
+    }
+
+    func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+        switch key
+        {
+        case "p":
+            togglePlayerStats()
+        default: 
+            break
+            // print(key)
+        }
+    }
+    
+    override func teardown() {
+        dispatcher.unregisterKeyDownHandler(handler: self)
+    }
+
+    func resetValues() {
+        healthText.text = "Health: " + String(getPlayerStats().getHealth())
+        damageText.text = "Damage: " + String(getPlayerStats().getDamage())
+        chakraText.text = "Chakra: " + String(getPlayerStats().getChakra())
+    }
+    
+    
+    override func render(canvas: Canvas) {
+        if (!showStats) {return}
+        resetValues()
+        
+        playerStatsRectangle = Rectangle(rect: Rect(topLeft: self.topLeft, size: playerSize), fillMode: .fillAndStroke)
+        
+        healthText.location = Point(x: topLeft.x + 20, y: topLeft.y + playerSize.height / 4)
+        damageText.location = Point(x: topLeft.x + 20, y: topLeft.y + playerSize.height / 2)
+        chakraText.location = Point(x: topLeft.x + 20, y: topLeft.y + (playerSize.height * 3) / 4)
+
+        healthText.font = "50pt Arial bold"
+        
+        canvas.render(LineWidth(width: 5), FillStyle(color: Color(.gray)), StrokeStyle(color: Color(.black)), playerStatsRectangle)
+        canvas.render(FillStyle(color: Color(.green)), healthText)
+        canvas.render(FillStyle(color: Color(.red)), damageText)
+        canvas.render(FillStyle(color: Color(.blue)), chakraText)
+        
+    } 
+
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
+        }
+        return mainDirector.playerStats
+
+    }
+    
+    private func togglePlayerStats() {
+        showStats = !showStats
+    }
+}

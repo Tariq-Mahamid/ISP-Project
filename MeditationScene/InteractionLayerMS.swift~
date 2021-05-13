@@ -38,6 +38,7 @@ class InteractionLayerMS : Layer, KeyDownHandler{
     }
 
     override func preSetup(canvasSize: Size, canvas: Canvas) {
+        print("ASDASD")
         dispatcher.registerKeyDownHandler(handler: self)
         canvasSizeWidth = canvasSize.width
 

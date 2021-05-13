@@ -10,6 +10,7 @@ class PlayerMS: RenderableEntity{
     var gameEnded = false
 
     init() {
+        print("CHACHACHACH")
         player = Rectangle(rect:Rect(), fillMode:.fill)
 
         // Using a meaningful name can be helpful for debugging

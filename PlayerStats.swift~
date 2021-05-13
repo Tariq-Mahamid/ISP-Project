@@ -27,6 +27,6 @@ class PlayerStats {
     }
 
     public func changeChakra(factor: Int) {
-        chakra += factor
+        damage += factor
     }
 }

@@ -43,7 +43,6 @@ class Background : RenderableEntity {
             Crossroads.renderMode = .sourceAndDestination(sourceRect:sourceRect, destinationRect:destinationRect)
             
             canvas.render(Crossroads)
-            print("rendered")
         }
     }
 }

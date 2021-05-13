@@ -2,7 +2,7 @@ import Igis
 import Scenes
 
 
-class EndScreen : RenderableEntity{
+class EndScreenMS : RenderableEntity{
     var endScreen = Rectangle(rect: Rect())
     var endScreenWidth : Int
     var endScreenHeight : Int
@@ -14,14 +14,15 @@ class EndScreen : RenderableEntity{
     
     var gameEnded = false
     var score = 0 //Should be retrieved before End Screen is rendered
-
+    var addScore = true
+    
     init() {
         endScreenWidth = 1100
         endScreenHeight = 400
     }
 
-    func background() -> Background {
-        guard let mainScene = scene as? MainScene else {
+    func background() -> BackgroundMS {
+        guard let mainScene = scene as? MeditationScene else {
             fatalError("mainScene of type MainScene is required")
         }
         let backgroundLayer = mainScene.backgroundLayer
@@ -43,6 +44,11 @@ class EndScreen : RenderableEntity{
         }
 
         score = background().score
+
+        if addScore {
+            getPlayerStats().changeChakra(factor: score)
+            addScore = false
+        }
         
         let endScreenText = Text(location: Point(x: endScreen.rect.topLeft.x + 10, y:endScreen.rect.topLeft.y + 50), text: "Training Finished! You lost too many lives.")
         endScreenText.font = "40pt Luminari"
@@ -54,5 +60,13 @@ class EndScreen : RenderableEntity{
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
         }
+    }
+
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
+        }
+        return mainDirector.playerStats
+
     }
 }                          

@@ -51,6 +51,8 @@ class BackgroundLayerAS : Layer {
               player.gameEnded = true
               hearts.gameEnded = true
               scoreboard.gameEnded = true
+              endScreen.score = scoreboard.scoreValue
+              endScreen.gameEnded = true
           }
       }
 
