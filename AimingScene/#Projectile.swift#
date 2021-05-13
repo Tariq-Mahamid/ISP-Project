@@ -3,10 +3,10 @@ import Igis
 import Foundation
 
 class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
-    let ellipse = Ellipse(center:Point(x:0, y:0), radiusX:25, radiusY:25)
-//    let strokeStyle = StrokeStyle(color:Color(.burlywood))
+    let ellipse = Ellipse(center:Point(x:0, y:0), radiusX:25, radiusY:25, rotation:Double=0.0, startAngle:Double=0.0, endAngle:Double=2.0*Double.pi, antiClockwise:Bool=false, fill)
+    let strokeStyle = StrokeStyle(color:Color(.burlywood))
 //    let fillStyle = FillStyle(color:Color(.gray))
-    let lineWidth = LineWidth(width:0)
+    let lineWidth = LineWidth(width:1)
     var canvasHeight = 1000
     var canvasWidth = 2000
     var gameEnded = false
@@ -42,7 +42,7 @@ class Projectile: RenderableEntity, KeyDownHandler, KeyUpHandler {
 
     override func render(canvas:Canvas) {
         if !gameEnded {
-//            canvas.render(ellipse)
+            canvas.render(strokeStyle, lineWidth, ellipse)
             
             if ellipse.center.x + velocity + 50 <= canvasWidth && ellipse.center.x + velocity - 100 >= 0{
                 ellipse.center = Point(x: ellipse.center.x + velocity, y: ellipse.center.y)
