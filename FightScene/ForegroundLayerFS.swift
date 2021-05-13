@@ -9,28 +9,23 @@ class ForegroundLayerFS : Layer {
     public let opponentHealthBar : HealthBarFS
     let ground = GroundFS()
     let textDisplay = TextDisplayFS()
-    let playerMovesArray : [PlayerMove]  
-    let chakra = 100
     let playerMoves : PlayerMovesFS
-    let playerStats : PlayerStatsFS
-    let opponentStats : PlayerStatsFS
+    let chakra = 100
+    var playerStats : PlayerStatsFS
+    var opponentStats : PlayerStatsFS
     let cloneAttackDamage = 10
     public var enemyStunMoves = 0
     public var currentCloneAttackMoves = 0
     public var gameOver = false
     private let gameOverScreen = GameoverScreenFS()
-    
+
     init() {
         playerStats = PlayerStatsFS(size: playerStatsSize, isOpponent: false)
         opponentStats = PlayerStatsFS(size: opponentStatsSize, isOpponent: true)
         playerHealthBar = HealthBarFS(playerStatsSize: playerStatsSize, isOpponent: false)
         opponentHealthBar = HealthBarFS(playerStatsSize: opponentStatsSize, isOpponent: true)
-        playerMovesArray = [PlayerMove(name: "Normal Attack", damage: 10, moveType: PlayerMoveType.normal, totalChakra: chakra / 5),
-                           PlayerMove(name: "Clone Attack", damage: cloneAttackDamage, moveType: PlayerMoveType.clone, totalChakra: chakra / 20),
-                           PlayerMove(name: "Stun Attack", damage: 0, moveType: PlayerMoveType.stun, totalChakra: chakra / 10),
-                           PlayerMove(name: "Rasenshuriken", damage: 50, moveType: PlayerMoveType.rasenshuriken, totalChakra: Int(chakra / 50))]
-        playerMoves = PlayerMovesFS(playerMoves: playerMovesArray)
-        
+        playerMoves = PlayerMovesFS()
+
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Foreground")
 
@@ -45,13 +40,14 @@ class ForegroundLayerFS : Layer {
         insert(entity: textDisplay, at: .front)
         insert(entity: gameOverScreen, at: .front)
     }
-
+    
     override func preCalculate(canvas: Canvas) {
         if (playerMoves.shouldInitiateAttackSequence){
             initiateAttackSequence()
             playerMoves.shouldInitiateAttackSequence = false
         }
     }
+    
     
     public func initiateAttackSequence() {
         if (gameOver) {return}

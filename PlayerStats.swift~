@@ -1,0 +1,8 @@
+import Igis
+import Scenes
+
+struct PlayerStats {
+    public var health = 0
+    public var damage = 0
+    public var chakra = 0
+}

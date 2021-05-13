@@ -1,8 +1,9 @@
+
 import Igis
 import Scenes
 
 class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
-    public let playerMoves : [PlayerMove]
+    public var playerMoves = [PlayerMove]()
     public var playerMoveRectangles = [PlayerMoveRectangle]()
     public var currentPlayerMoveRectangle = PlayerMoveRectangle(rectangle: Rectangle(rect: Rect()), playerMove: PlayerMove(name: "", damage: 0, moveType: PlayerMoveType.normal, totalChakra: 0))
     public var playerMoveChakrasForegroundLayer = [Rectangle]()
@@ -10,15 +11,19 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
     var shouldInitiateAttackSequence = false
     var playerChakra = 0
     
-    init(playerMoves: [PlayerMove]) {
-        self.playerMoves = playerMoves
-        
+    init() {
         super.init(name: "PlayerMoves")
     }
     
-    override func setup(canvasSize: Size, canvas: Canvas) {
-        playerChakra = foregroundLayer().chakra
-        
+    override func setup(canvasSize: Size, canvas: Canvas) {  
+        playerChakra = getPlayerStats().getChakra()
+
+        let playerMovesArray = [PlayerMove(name: "Normal Attack", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.normal, totalChakra: playerChakra / 5),
+                            PlayerMove(name: "Clone Attack", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.clone, totalChakra: playerChakra / 20),
+                            PlayerMove(name: "Stun Attack", damage: 0, moveType: PlayerMoveType.stun, totalChakra: playerChakra / 10),
+                            PlayerMove(name: "Rasenshuriken", damage: getPlayerStats().getDamage() * 5, moveType: PlayerMoveType.rasenshuriken, totalChakra: Int(playerChakra / 50))]
+        playerMoves = playerMovesArray
+
         let groundTopLeft = canvasSize.height * 2 / 3
         let playerMoveRectSize = Size(width: canvasSize.width / 6, height: canvasSize.height / 6)
         let playerChakraSize = Size(width: canvasSize.width/6, height: canvasSize.height / 18)
@@ -73,7 +78,7 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
 
         if let canvasSize = canvas.canvasSize {
             let playerChakraSize = Size(width: canvasSize.width/6, height: canvasSize.height / 18)
-            
+           
             for currentChakra in 0..<playerMoveChakrasBackgroundLayer.count {
                 let currentForegroundRect = playerMoveChakrasForegroundLayer[currentChakra].rect
                 let currentPlayerMove = playerMoveRectangles[currentChakra].playerMove
@@ -90,11 +95,10 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
         }
     }
     
-    private func foregroundLayer() -> ForegroundLayerFS {
-        guard let mainScene = scene as? FightScene else {
-            fatalError("mainScene of type MainScene is required")
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
         }
-        return mainScene.foregroundLayer
-
+        return mainDirector.playerStats
     }
 }

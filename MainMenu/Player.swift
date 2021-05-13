@@ -52,9 +52,9 @@ class Player: RenderableEntity, KeyDownHandler {
     override func render(canvas:Canvas) {
         if let canvasSize = canvas.canvasSize {
             
-            let isTouchingLeft = player.rect.topLeft.x < 10
+            let isTouchingLeft = player.rect.topLeft.x < -(canvasSize.width / 2)
             let isTouchingTop = player.rect.topRight.y < 10
-            let isTouchingRight = player.rect.topRight.x > canvasSize.width - 10
+            let isTouchingRight = player.rect.topRight.x > (canvasSize.width / 2) - 10
             let isTouchingBottom = player.rect.bottomRight.y > canvasSize.height - 10
               
             if(isTouchingTop){
@@ -74,46 +74,48 @@ class Player: RenderableEntity, KeyDownHandler {
             if ImagePlayerOne.isReady && leftAnimation{
                 let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
                 let destinationRect = Rect(topLeft:Point(x:(Int((specificCanvasWidth/2)+x+addend)-Int(playerSize.width/2)),y: Int((canvasSize.height/2)+y+addendy) - Int(playerSize.height / 2)), size:Size(width:200, height:206))
-
                 ImagePlayerOne.renderMode = .sourceAndDestination(sourceRect:sourceRect, destinationRect:destinationRect)
                 
-                canvas.render(ImagePlayerOne)
+                canvas.render(ImagePlayerOne)                
             }
-            if ImagePlayerTwo.isReady && !leftAnimation{
+            else if ImagePlayerTwo.isReady && !leftAnimation{
                 let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
                 let destinationRect = Rect(topLeft:Point(x:(Int((specificCanvasWidth/2)+x+addend)-Int(playerSize.width/2)),y: Int((canvasSize.height/2)+y+addendy) - Int(playerSize.height / 2)), size:Size(width:200, height:206))
                 
                 ImagePlayerTwo.renderMode = .sourceAndDestination(sourceRect:sourceRect, destinationRect:destinationRect)
                 
                 canvas.render(ImagePlayerTwo)
+                
             }
         }
-        leftAnimation = !leftAnimation
+        
     }
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         switch key
         {
         case "a":
-            if(willStayInXAxis(player.rect.topLeft.x-velocity)) {
-                moveX(-velocity)
-            }
+            moveX(-velocity)
         case "d":
-            if(willStayInXAxis(player.rect.topRight.x+velocity)){
-                moveX(velocity)
-            }
+            moveX(velocity)
         case "s":
-            if(willStayInYAxis(player.rect.bottomRight.y+velocity)){
-                moveY(velocity)
-            }
+            moveY(velocity)
+            leftAnimation = !leftAnimation
         case "w":
-            if(willStayInYAxis(player.rect.topRight.y-velocity)){
-                moveY(-velocity)
-            }
+            moveY(-velocity)
+            leftAnimation = !leftAnimation
         default: 
             print(key)
         }
     }
 
+    private func foregroundLayer() -> ForegroundLayer {
+        guard let mainScene = scene as? MainScene else {
+            fatalError("mainScene of type MainScene is required")
+        }
+        return mainScene.foregroundLayer
+
+    }
+    
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
@@ -128,19 +130,5 @@ class Player: RenderableEntity, KeyDownHandler {
         leftTrue += 1
         addendy += addY
         player.rect.topLeft = Point(x: player.rect.topLeft.x, y: player.rect.topLeft.y + addY)
-    }
-    func willStayInXAxis(_ futureXPosition:Int) -> Bool{
-
-        let specificCanvasWidth = 480*(canvasSize.height)/272
-        let canvasWidth = canvasSize.width
-
-        let x = (canvasWidth/2)-(specificCanvasWidth/2)
-        
-        return futureXPosition >= x && futureXPosition <= specificCanvasWidth+x
-        
-    }
-    func willStayInYAxis(_ futureYPosition:Int) -> Bool{
-        
-        return futureYPosition >= 0 && futureYPosition <= canvasSize.height
     }
 }

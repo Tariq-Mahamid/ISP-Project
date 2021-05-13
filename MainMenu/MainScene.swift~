@@ -22,7 +22,7 @@ class MainScene : Scene {
     init() {
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Main")
-
+        print("Main Menu")
         // We insert our Layers in the constructor
         // We place each layer in front of the previous layer
         insert(layer:backgroundLayer, at:.back)
