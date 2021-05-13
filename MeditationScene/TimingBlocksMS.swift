@@ -13,6 +13,8 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var timed = false
     var gameEnded = false
 
+//    let backgroundImage : Image
+
     init() {
         super.init(name: "TimingBlock")
     }
@@ -32,6 +34,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         fillStyle = FillStyle(color: Color(.gray))
         canvasWidth = canvasSize.width
         fillStyle = FillStyle(color: randomizeBlockColor())
+//        canvas.setup(backgroundImage)
     }
 
     override func render(canvas:Canvas) {

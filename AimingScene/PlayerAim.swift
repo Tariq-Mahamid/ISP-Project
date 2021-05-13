@@ -33,10 +33,8 @@ class PlayerAim: RenderableEntity, KeyDownHandler, KeyUpHandler {
         if !gameEnded {
             canvas.render(FillStyle(color: Color(.orange)), player)
 
-            if isProjectileInHand {
-                if (player.rect.bottomRight.x + velocity) <= (canvasWidth - 50)  && player.rect.bottomLeft.x + velocity >= 50{
+            if (player.rect.bottomRight.x + velocity) <= (canvasWidth - 50)  && player.rect.bottomLeft.x + velocity >= 50{
                     player.rect.topLeft = Point(x: player.rect.topLeft.x + velocity, y: player.rect.topLeft.y)
-                }
             }
         }
     }

@@ -54,6 +54,17 @@ class PlayerAim: RenderableEntity, KeyDownHandler, KeyUpHandler {
                 if isProjectileInHand {
                     velocity = -14
                 }
+            case "q":
+                if gameEnded {
+                    director.enqueueScene(scene: MainScene())
+                    director.transitionToNextScene()
+                }
+            case "r":
+                if gameEnded {
+                    director.enqueueScene(scene: AimingScene())
+                    director.transitionToNextScene()
+                }
+                
             default:
                 print(key)
             }
