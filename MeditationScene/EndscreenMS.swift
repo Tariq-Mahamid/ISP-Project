@@ -1,7 +1,6 @@
 import Igis
 import Scenes
 
-
 class EndScreenMS : RenderableEntity, KeyDownHandler{
     var endScreen = Rectangle(rect: Rect())
     var endScreenWidth : Int
@@ -37,17 +36,11 @@ class EndScreenMS : RenderableEntity, KeyDownHandler{
     }
 
     override func render(canvas:Canvas) {
-
         if background().lives == 0 {
             gameEnded = true
         }
 
         score = background().score
-
-        if addScore {
-            getPlayerStats().changeChakra(factor: score)
-            addScore = false
-        }
         
         let endScreenText = Text(location: Point(x: endScreen.rect.topLeft.x + 10, y:endScreen.rect.topLeft.y + 50), text: "Training Finished! You lost too many lives.")
         endScreenText.font = "40pt Luminari"
@@ -58,6 +51,11 @@ class EndScreenMS : RenderableEntity, KeyDownHandler{
         if gameEnded {
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
+
+            if addScore {
+                getPlayerStats().changeChakra(factor: score)
+                addScore = false
+            }
         }
     }
     

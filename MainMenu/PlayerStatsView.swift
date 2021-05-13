@@ -69,7 +69,6 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
             fatalError("mainDirector of type ShellDirector is required")
         }
         return mainDirector.playerStats
-
     }
     
     private func togglePlayerStats() {
