@@ -29,7 +29,8 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         case "p":
             togglePlayerStats()
         default: 
-            print(key)
+            continue
+            // print(key)
         }
     }
     
@@ -43,6 +44,7 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         chakraText.text = "Chakra: " + String(getPlayerStats().getChakra())
     }
     
+    
     override func render(canvas: Canvas) {
         if (!showStats) {return}
         resetValues()
@@ -53,7 +55,7 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         damageText.location = Point(x: topLeft.x + 20, y: topLeft.y + playerSize.height / 2)
         chakraText.location = Point(x: topLeft.x + 20, y: topLeft.y + (playerSize.height * 3) / 4)
 
-        healthText.font = "50pt Arial"
+        healthText.font = "50pt Arial bold"
         
         canvas.render(LineWidth(width: 5), FillStyle(color: Color(.gray)), StrokeStyle(color: Color(.black)), playerStatsRectangle)
         canvas.render(FillStyle(color: Color(.green)), healthText)

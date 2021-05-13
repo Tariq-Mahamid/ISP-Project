@@ -14,6 +14,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var gameEnded = false
 
     init() {
+        print("YOYO")
         super.init(name: "TimingBlock")
     }
 
@@ -34,6 +35,10 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         fillStyle = FillStyle(color: randomizeBlockColor())
     }
 
+    override func teardown() {
+        dispatcher.unregisterKeyDownHandler(handler: self)
+    }
+    
     override func render(canvas:Canvas) {
         
         if background().lives == 0 {
@@ -52,7 +57,6 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         }
         if block.rect.topLeft.x == canvasWidth + 120 {
             fillStyle = FillStyle(color: randomizeBlockColor())
-//            print(associateKey())
         }
     }
     
@@ -121,6 +125,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         let conditionsForScoringMet = isConditionsForScoringMet()
         let correctKey = associateKey()
+
         switch code {
         case "KeyQ":
             if conditionsForScoringMet && (correctKey == "KeyQ") {
@@ -133,6 +138,10 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                     background().decreaseLives()
                 }
                 timed = true
+            }
+            if gameEnded {
+                director.enqueueScene(scene: MainScene())
+                director.transitionToNextScene()
             }
         case "KeyW":
             if conditionsForScoringMet && (correctKey == "KeyW") {
@@ -169,6 +178,12 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                     background().decreaseLives()
                 }
                 timed = true
+            }
+            if gameEnded {
+                if gameEnded {
+                    director.enqueueScene(scene: MeditationScene())
+                    director.transitionToNextScene()
+                }
             }
         default :
             print("Unspecified key has been pressed.")

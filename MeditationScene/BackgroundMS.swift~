@@ -40,6 +40,7 @@ class BackgroundMS : RenderableEntity {
       }
 
       override func setup(canvasSize:Size, canvas:Canvas) {
+          print("CHACHACHAHC")
 
         canvas.setup(backgroundImage)
         canvasWidth = canvasSize.width

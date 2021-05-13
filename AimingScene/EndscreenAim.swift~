@@ -2,7 +2,7 @@ import Igis
 import Scenes
 
 
-class EndScreen : RenderableEntity{
+class EndScreenAim : RenderableEntity{
     var endScreen = Rectangle(rect: Rect())
     var endScreenWidth : Int
     var endScreenHeight : Int

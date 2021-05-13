@@ -34,6 +34,10 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         fillStyle = FillStyle(color: randomizeBlockColor())
     }
 
+    override func teardown() {
+        dispatcher.unregisterKeyDownHandler(handler: self)
+    }
+    
     override func render(canvas:Canvas) {
         
         if background().lives == 0 {
@@ -52,7 +56,6 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         }
         if block.rect.topLeft.x == canvasWidth + 120 {
             fillStyle = FillStyle(color: randomizeBlockColor())
-//            print(associateKey())
         }
     }
     
@@ -121,6 +124,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
         let conditionsForScoringMet = isConditionsForScoringMet()
         let correctKey = associateKey()
+
         switch code {
         case "KeyQ":
             if conditionsForScoringMet && (correctKey == "KeyQ") {

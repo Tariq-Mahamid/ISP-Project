@@ -14,7 +14,8 @@ class EndScreenMS : RenderableEntity{
     
     var gameEnded = false
     var score = 0 //Should be retrieved before End Screen is rendered
-
+    var addScore = true
+    
     init() {
         endScreenWidth = 1100
         endScreenHeight = 400
@@ -43,6 +44,11 @@ class EndScreenMS : RenderableEntity{
         }
 
         score = background().score
+
+        if addScore {
+            getPlayerStats().changeChakra(factor: score)
+            addScore = false
+        }
         
         let endScreenText = Text(location: Point(x: endScreen.rect.topLeft.x + 10, y:endScreen.rect.topLeft.y + 50), text: "Training Finished! You lost too many lives.")
         endScreenText.font = "40pt Luminari"
@@ -54,5 +60,13 @@ class EndScreenMS : RenderableEntity{
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
         }
+    }
+
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
+        }
+        return mainDirector.playerStats
+
     }
 }                          

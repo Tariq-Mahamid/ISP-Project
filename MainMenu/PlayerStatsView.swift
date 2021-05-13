@@ -29,7 +29,8 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         case "p":
             togglePlayerStats()
         default: 
-            print(key)
+            break
+            // print(key)
         }
     }
     
@@ -42,6 +43,7 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         damageText.text = "Damage: " + String(getPlayerStats().getDamage())
         chakraText.text = "Chakra: " + String(getPlayerStats().getChakra())
     }
+    
     
     override func render(canvas: Canvas) {
         if (!showStats) {return}

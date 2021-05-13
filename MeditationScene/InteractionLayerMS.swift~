@@ -19,7 +19,7 @@ class InteractionLayerMS : Layer, KeyDownHandler{
     let block7 = TimingBlockMS()
     let block8 = TimingBlockMS()
 
-    var arrayOfBlocks = [TimingBlock]()
+    var arrayOfBlocks = [TimingBlockMS]()
     var canvasSizeWidth = 0
 
     init() {
@@ -38,6 +38,7 @@ class InteractionLayerMS : Layer, KeyDownHandler{
     }
 
     override func preSetup(canvasSize: Size, canvas: Canvas) {
+        print("ASDASD")
         dispatcher.registerKeyDownHandler(handler: self)
         canvasSizeWidth = canvasSize.width
 
