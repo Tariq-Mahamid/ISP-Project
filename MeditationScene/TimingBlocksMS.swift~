@@ -12,10 +12,8 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var scored = false
     var timed = false
     var gameEnded = false
-    var didQueueScene = false
     
     init() {
-        print("YOYOYOYOYOOYOYOYOYOOYOYYOOYOYOOYOYO")
         super.init(name: "TimingBlock")
     }
 
@@ -128,8 +126,6 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         let conditionsForScoringMet = isConditionsForScoringMet()
         let correctKey = associateKey()
         
-//        print(didQueueScene)
-        
         switch code {
         case "KeyQ":
             if conditionsForScoringMet && (correctKey == "KeyQ") {
@@ -142,12 +138,6 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                     background().decreaseLives()
                 }
                 timed = true
-            }
-            if gameEnded && !didQueueScene{
-                didQueueScene = true
-                print("QUEING MAINSCENE")
-                director.enqueueScene(scene: MainScene())
-                director.transitionToNextScene()
             }
         case "KeyW":
             if conditionsForScoringMet && (correctKey == "KeyW") {
@@ -184,12 +174,6 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
                     background().decreaseLives()
                 }
                 timed = true
-            }
-            if gameEnded && !didQueueScene{
-                didQueueScene = true
-                print("QUEUEING MEDITGIATION SCENE")
-                director.enqueueScene(scene: MeditationScene())
-                director.transitionToNextScene()
             }
         default :
             print("Unspecified key has been pressed.")

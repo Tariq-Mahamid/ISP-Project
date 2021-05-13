@@ -17,7 +17,6 @@ class EndScreenMS : RenderableEntity{
     var addScore = true
     
     init() {
-        print("YOYOY")
         endScreenWidth = 1100
         endScreenHeight = 400
     }
