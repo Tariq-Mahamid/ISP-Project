@@ -9,6 +9,7 @@ class ForegroundLayerFS : Layer {
     public let opponentHealthBar : HealthBarFS
     let ground = GroundFS()
     let textDisplay = TextDisplayFS()
+    let playerMoves : PlayerMovesFS
     let chakra = 100
     var playerStats : PlayerStatsFS
     var opponentStats : PlayerStatsFS
@@ -23,7 +24,7 @@ class ForegroundLayerFS : Layer {
         opponentStats = PlayerStatsFS(size: opponentStatsSize, isOpponent: true)
         playerHealthBar = HealthBarFS(playerStatsSize: playerStatsSize, isOpponent: false)
         opponentHealthBar = HealthBarFS(playerStatsSize: opponentStatsSize, isOpponent: true)
-        PlayerMovesFS()
+        playerMoves = PlayerMovesFS()
 
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Foreground")

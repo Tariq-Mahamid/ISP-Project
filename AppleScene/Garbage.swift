@@ -7,7 +7,7 @@ class Garbage : RenderableEntity{
     var garbage : Rectangle
     var velocity = 14
     var garbageSize : Size
-    var garbageSpawnNumber = 1
+    var garbageSpawnNumber = 1 
     let scoreboard = Scoreboard()
     var gameEnded = false
     var ImageOfBoulder : Image
@@ -15,7 +15,7 @@ class Garbage : RenderableEntity{
     init(garbageSpawnNumber: Int) {
         garbageSize = Size(width: 250, height: 250)
         self.garbageSpawnNumber = garbageSpawnNumber
-        garbage = Rectangle(rect: Rect())
+        garbage = Rectangle(rect: Rect()) 
 
        guard let ImageOfBoulderURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Boulder.png?raw=true") else {
            fatalError("Failed to create URL for ImageOfBoulder")
@@ -26,7 +26,7 @@ class Garbage : RenderableEntity{
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
-        garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill)
+        garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill) ///////
         canvas.setup(ImageOfBoulder)
     }
     
@@ -41,11 +41,11 @@ class Garbage : RenderableEntity{
     }
     
     override func calculate(canvasSize: Size){
-        if (garbage.rect.bottomLeft.y > canvasSize.height) {
+        if (garbage.rect.bottomLeft.y > canvasSize.height) { 
             resetPosition(canvasSize)
         }
         
-        garbage.rect.topLeft = Point(x: garbage.rect.topLeft.x, y: garbage.rect.topLeft.y + velocity)
+        garbage.rect.topLeft = Point(x: garbage.rect.topLeft.x, y: garbage.rect.topLeft.y + velocity) 
     }
 
     public func resetPosition(_ canvasSize: Size){

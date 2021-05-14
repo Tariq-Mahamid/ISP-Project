@@ -5,7 +5,7 @@ import Foundation
 class PlayerAim: RenderableEntity, KeyDownHandler, KeyUpHandler {
     var player: Rectangle
     var canvasSize = Size()
-    var playerSize = Size(width: 50, height: 50)
+    var playerSize = Size(width: 100, height: 100)
     var velocity = 0
     var canvasWidth = 1500
     var isProjectileInHand = true
@@ -76,6 +76,8 @@ class PlayerAim: RenderableEntity, KeyDownHandler, KeyUpHandler {
     }
 
     override func render(canvas:Canvas) {
+
+        if (gameEnded) {return}
         
         if abs(velocity) > 0 {
             leftAnimation = !leftAnimation

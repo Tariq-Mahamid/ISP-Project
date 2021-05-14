@@ -11,7 +11,7 @@ class BackgroundLayerAS : Layer {
     let player = PlayerAS()
     let hearts = Hearts()
     let scoreboard = Scoreboard()
-    let endScreen = EndScreen()
+    let endScreen = EndScreenAS()
     
       init() {
           // Using a meaningful name can be helpful for debugging
@@ -62,8 +62,9 @@ class BackgroundLayerAS : Layer {
           for currentObject in 0..<3 {
               let appleBoundingRect = apples[currentObject].boundingRect()
               let garbageBoundingRect = garbages[currentObject].boundingRect()
+              let garbageBoundingEllipse = Ellipse(center: Point(x:garbageBoundingRect.topLeft.x + garbageBoundingRect.size.width/2, y: garbageBoundingRect.topLeft.y + garbageBoundingRect.size.height/2), radiusX: garbageBoundingRect.width/2, radiusY: garbageBoundingRect.height/2)
 
-              let garbageContainment = playerBoundingRect.containment(target: garbageBoundingRect)
+              let garbageContainment = playerBoundingRect.containment(target: garbageBoundingEllipse)
               let appleContainment = playerBoundingRect.containment(target: appleBoundingRect)
 
               let isTouchingGarbage = garbageContainment.contains(.overlapsTop) && !garbageContainment.contains(.beyondHorizontally)
@@ -76,9 +77,6 @@ class BackgroundLayerAS : Layer {
                   
                   //print(hearts.playerLives)    
                   hearts.playerLives -= 1
-                  
-                  
-                  
               }
               
               if (isTouchingApple) {
