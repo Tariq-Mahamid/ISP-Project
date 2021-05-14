@@ -52,10 +52,7 @@ class PlayerMS: RenderableEntity{
             gameEnded = true
         }
         
-        if !gameEnded {
-            canvas.render(FillStyle(color: Color(.orange)))
-        }
-
+        if (gameEnded) {return}
         let destinationRect = Rect(topLeft: player.rect.topLeft, size: playerSize)
 
         if frameCounter == 30 {
