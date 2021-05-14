@@ -18,11 +18,7 @@ class ForegroundLayerFS : Layer {
     public var enemyStunMoves = 0
     public var currentCloneAttackMoves = 0
     public var gameOver = false
-<<<<<<< HEAD
-    public let gameOverScreen = GameoverScreenFS()
-=======
     let gameOverScreen = GameoverScreenFS()
->>>>>>> 777072121ee02820f0282ec7e709ba9e2ca141c4
 
     init() {
         playerStats = PlayerStatsFS(size: playerStatsSize, isOpponent: false)
