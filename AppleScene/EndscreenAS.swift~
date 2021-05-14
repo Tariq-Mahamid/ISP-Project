@@ -13,7 +13,8 @@ class EndScreenAS : RenderableEntity{
     
     var gameEnded = false
     var score = 0 //Should be retrieved before End Screen is rendered
-
+    var addScore = true
+    
     init() {
         endScreenWidth = 1100
         endScreenHeight = 400
@@ -44,8 +45,12 @@ class EndScreenAS : RenderableEntity{
         if gameEnded {
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
+            if addScore {
+                getPlayerStats().changeHealth(factor: score)
 
-            getPlayerStats().changeHealth(factor: score)
+                addScore = false
+            }
+            
         }
     }
     
@@ -54,6 +59,5 @@ class EndScreenAS : RenderableEntity{
             fatalError("mainDirector of type ShellDirector is required")
         }
         return mainDirector.playerStats
-
     }
 }                          

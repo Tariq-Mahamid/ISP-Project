@@ -59,6 +59,10 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         damageText.location = Point(x: topLeft.x + 20, y: topLeft.y + playerSize.height / 2)
         chakraText.location = Point(x: topLeft.x + 20, y: topLeft.y + (playerSize.height * 3) / 4)
 
+        healthText.alignment = .left
+        damageText.alignment = .left
+        chakraText.alignment = .left
+        
         healthText.font = "50pt Arial bold"
         
         canvas.render(LineWidth(width: 5), FillStyle(color: Color(.gray)), StrokeStyle(color: Color(.black)), playerStatsRectangle)

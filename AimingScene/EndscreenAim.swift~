@@ -13,6 +13,7 @@ class EndScreenAim : RenderableEntity{
     let endScreenLineWidth = LineWidth(width:5)
     
     var gameEnded = false
+    var addedScore = true
     var score = 0 //Should be retrieved before End Screen is rendered
 
     init() {
@@ -21,10 +22,8 @@ class EndScreenAim : RenderableEntity{
     }
 
     override func setup(canvasSize:Size, canvas: Canvas) {
-        
         endScreenSize = Size(width:endScreenWidth, height:endScreenHeight)
         endScreen = Rectangle(rect: Rect(topLeft: Point(x: (canvasSize.width/2 - endScreenWidth/2), y: (canvasSize.height/2 - endScreenHeight/2)), size: endScreenSize), fillMode: .fillAndStroke)
-
     }
 
     override func render(canvas:Canvas) {
@@ -33,10 +32,23 @@ class EndScreenAim : RenderableEntity{
         
         let scoreText = Text(location: Point(x: endScreen.rect.topLeft.x + 10, y:endScreen.rect.topLeft.y + 250), text: "Experience gained: \(score)")
         scoreText.font = "40pt Luminari"
-
+        
         if gameEnded {
+            if (addedScore) {
+                getPlayerStats().changeDamage(factor: score)
+                addedScore = false
+            }
+            
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
         }
+    }
+
+    func getPlayerStats() -> PlayerStats {
+        guard let mainDirector = director as? ShellDirector else {
+            fatalError("mainDirector of type ShellDirector is required")
+        }
+        return mainDirector.playerStats
+
     }
 }                          
