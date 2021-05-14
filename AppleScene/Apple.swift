@@ -29,7 +29,7 @@ class Apple : RenderableEntity{
     }
     
     override func render(canvas: Canvas){
-        if (gameEnded) {return}
+
         let destinationRect = Rect(topLeft: apple.rect.topLeft, size: appleSize)
         ImageOfRamen.renderMode = .destinationRect(destinationRect)
 

@@ -2,7 +2,7 @@ import Igis
 import Scenes
 
 class ExitSceneAS : Layer, KeyDownHandler{
-    let hearts = Hearts()
+//    let hearts = Hearts()
     let scoreboard = Scoreboard()
     var readyToQuit = false
 

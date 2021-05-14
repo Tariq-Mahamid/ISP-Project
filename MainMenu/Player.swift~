@@ -125,10 +125,6 @@ class Player: RenderableEntity, KeyDownHandler {
             }
             let sourceRect = Rect(topLeft:Point(x:0, y:0), size:Size(width:400, height:412))
             let destinationRect = Rect(topLeft:Point(x:(Int((specificCanvasWidth/2)+x+addend)-Int(playerSize.width/2)),y: Int((canvasSize.height/2)+y+addendy) - Int(playerSize.height / 2)), size:Size(width:200, height:206))
-            print("Render Down: \(renderDown)")
-            print("Rnedr Up: \(renderUp)")
-            print("RenderLeft: \(renderLeft)")
-            print("RenderRight: \(renderRight)")
             if renderDown {
                 if ImagePlayerOne.isReady && leftAnimation{
                 ImagePlayerOne.renderMode = .sourceAndDestination(sourceRect:sourceRect, destinationRect:destinationRect)

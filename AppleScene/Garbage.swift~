@@ -1,6 +1,6 @@
 import Igis
 import Scenes
-import Foundation
+// import Foundation
 
 class Garbage : RenderableEntity{
 
@@ -31,11 +31,9 @@ class Garbage : RenderableEntity{
     }
     
     override func render(canvas: Canvas){
-        let destinationRect = Rect(topLeft: garbage.rect.topLeft, size: garbageSize)
-        ImageOfBoulder.renderMode = .destinationRect(destinationRect)
-
-        canvas.render(ImageOfBoulder)
-    
+        if !gameEnded {
+            canvas.render(FillStyle(color: Color(.gray)), garbage)
+        } 
     }
     
     override func calculate(canvasSize: Size){

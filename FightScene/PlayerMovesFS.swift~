@@ -22,7 +22,7 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
                             PlayerMove(name: "Clone Attack", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.clone, totalChakra: playerChakra / 20),
                             PlayerMove(name: "Stun Attack", damage: 0, moveType: PlayerMoveType.stun, totalChakra: playerChakra / 10),
                             PlayerMove(name: "Rasenshuriken", damage: getPlayerStats().getDamage() * 5, moveType: PlayerMoveType.rasenshuriken, totalChakra: Int(playerChakra / 50))]
-        playerMoves = PlayerMovesFS(playerMoves: playerMovesArray)
+        playerMoves = playerMovesArray
 
         let groundTopLeft = canvasSize.height * 2 / 3
         let playerMoveRectSize = Size(width: canvasSize.width / 6, height: canvasSize.height / 6)

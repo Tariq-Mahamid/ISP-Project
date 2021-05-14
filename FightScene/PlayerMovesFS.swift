@@ -18,10 +18,10 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
     override func setup(canvasSize: Size, canvas: Canvas) {  
         playerChakra = getPlayerStats().getChakra()
 
-        let playerMovesArray = [PlayerMove(name: "Normal Attack", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.normal, totalChakra: playerChakra / 5),
-                            PlayerMove(name: "Clone Attack", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.clone, totalChakra: playerChakra / 20),
+        let playerMovesArray = [PlayerMove(name: "Normal Attack", damage: getPlayerStats().getDamage() / 5, moveType: PlayerMoveType.normal, totalChakra: playerChakra / 5),
+                            PlayerMove(name: "Clone Attack", damage: getPlayerStats().getDamage() / 5, moveType: PlayerMoveType.clone, totalChakra: playerChakra / 20),
                             PlayerMove(name: "Stun Attack", damage: 0, moveType: PlayerMoveType.stun, totalChakra: playerChakra / 10),
-                            PlayerMove(name: "Rasenshuriken", damage: getPlayerStats().getDamage() * 5, moveType: PlayerMoveType.rasenshuriken, totalChakra: Int(playerChakra / 50))]
+                            PlayerMove(name: "Rasenshuriken", damage: getPlayerStats().getDamage(), moveType: PlayerMoveType.rasenshuriken, totalChakra: Int(playerChakra / 50))]
         playerMoves = playerMovesArray
 
         let groundTopLeft = canvasSize.height * 2 / 3

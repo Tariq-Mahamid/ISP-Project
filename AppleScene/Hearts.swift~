@@ -10,7 +10,7 @@ class Hearts : RenderableEntity {
     let livesText: Text
     let livesValueText : Text
 
-//    let endText : Text
+    let endText : Text
 
     var endValue = 0
     let scoreColor = FillStyle(color:Color(.red))
@@ -20,11 +20,11 @@ class Hearts : RenderableEntity {
     var HeartImage: Image 
  
     init () {
-//       endText = Text(location: Point.zero, text: "GAME OVER, press m to return to Main Menu" , fillMode: .fill)
+       endText = Text(location: Point.zero, text: "GAME OVER, press m to return to Main Menu" , fillMode: .fill)
        livesText = Text(location: Point.zero, text: "Lives Left:", fillMode: .fill)
        livesValueText = Text(location:Point.zero, text:"\(playerLives)", fillMode:.fill)
        
-        guard let HeartImageURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Heart.png?raw=true") else {
+        guard let HeartImageURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Boulder.png?raw=true") else {
           fatalError("Failed to create URL for HeartImage")
         }
             HeartImage = Image(sourceURL: HeartImageURL)
@@ -51,7 +51,7 @@ class Hearts : RenderableEntity {
 
        if playerLives <= 0{
 
-//           canvas.render(scoreColor, endText)
+           canvas.render(scoreColor, endText)
        }
            
            if let canvasSize = canvas.canvasSize {

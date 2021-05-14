@@ -7,7 +7,8 @@ class ForegroundLayerFS : Layer {
     let opponentStatsSize = Size(width: 400, height: 250)
     public let playerHealthBar : HealthBarFS
     public let opponentHealthBar : HealthBarFS
-    let ground = GroundFS()
+    let player : PlayerRenderFS
+    let opponent : PlayerRenderFS
     let textDisplay = TextDisplayFS()
     let playerMoves : PlayerMovesFS
     let chakra = 100
@@ -17,7 +18,7 @@ class ForegroundLayerFS : Layer {
     public var enemyStunMoves = 0
     public var currentCloneAttackMoves = 0
     public var gameOver = false
-    private let gameOverScreen = GameoverScreenFS()
+    public let gameOverScreen = GameoverScreenFS()
 
     init() {
         playerStats = PlayerStatsFS(size: playerStatsSize, isOpponent: false)
@@ -25,7 +26,9 @@ class ForegroundLayerFS : Layer {
         playerHealthBar = HealthBarFS(playerStatsSize: playerStatsSize, isOpponent: false)
         opponentHealthBar = HealthBarFS(playerStatsSize: opponentStatsSize, isOpponent: true)
         playerMoves = PlayerMovesFS()
-
+        player = PlayerRenderFS(playerImageString: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Punch1.png?raw=true", isOpponent: true)
+        opponent = PlayerRenderFS(playerImageString: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/MrBen.jpeg?raw=true", isOpponent: false)
+        
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Foreground")
 
@@ -35,8 +38,9 @@ class ForegroundLayerFS : Layer {
         insert(entity: opponentStats, at: .front)
         insert(entity: playerHealthBar, at: .front)
         insert(entity: opponentHealthBar, at: .front)
-        insert(entity: ground, at: .front)
         insert(entity: playerMoves, at: .front)
+        insert(entity: player, at: .front)
+        insert(entity: opponent, at: .front)
         insert(entity: textDisplay, at: .front)
         insert(entity: gameOverScreen, at: .front)
     }
@@ -56,6 +60,9 @@ class ForegroundLayerFS : Layer {
         if (!playerMove.canAttack()) {return}
 
         let damage = playerMove.getDamage()
+
+        player.initiateAnimation()
+        opponent.initiateAnimation()
         
         if (playerMove.getMoveType() == PlayerMoveType.clone) {
             currentCloneAttackMoves = damage / cloneAttackDamage

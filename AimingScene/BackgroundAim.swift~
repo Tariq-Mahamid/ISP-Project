@@ -8,7 +8,7 @@ import CoreFoundation
    */
 
 
-class Background : RenderableEntity {
+class BackgroundAim : RenderableEntity {
     var score = 0
     var countdownTimer: Timer!
     var totalTime = 25

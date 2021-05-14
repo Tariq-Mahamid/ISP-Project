@@ -15,10 +15,10 @@ class GameoverScreenFS : RenderableEntity, KeyDownHandler{
 
         if let canvasSize = canvas.canvasSize {
             if (foregroundLayer().gameOver) {
-                let rectangle = Rectangle(rect: Rect(topLeft: Point(x: canvasSize.width / 3, y: canvasSize.height / 4),
-                                                     size: Size(width: canvasSize.width / 3, height: canvasSize.height / 2)),
+                let rectangle = Rectangle(rect: Rect(topLeft: Point(x: canvasSize.width / 4, y: canvasSize.height / 3),
+                                                     size: Size(width: canvasSize.width / 4, height: canvasSize.height / 3)),
                                           fillMode: .fillAndStroke)
-                let gameOverText = Text(location: Point(x: canvasSize.width / 2, y: canvasSize.height / 2), text: "Null")
+                let gameOverText = Text(location: Point(x: rectangle.rect.topLeft.x + rectangle.rect.width / 2, y: rectangle.rect.topLeft.y + rectangle.rect.height / 2), text: "Null")
                 gameOverText.text = currentWinner == GameWinner.player ? "You Win!" : "You Lose :("
                 
                 canvas.render(LineWidth(width: 3), StrokeStyle(color: Color(.black)), FillStyle(color: Color(.gray)), rectangle)
@@ -51,7 +51,7 @@ class GameoverScreenFS : RenderableEntity, KeyDownHandler{
     }
 
     private func switchToMainMenu() {
-        director.enqueueScene(scene: MainMenu())
+        director.enqueueScene(scene: MainScene())
         director.transitionToNextScene()
     }
 

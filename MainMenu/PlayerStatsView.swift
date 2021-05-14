@@ -28,6 +28,8 @@ class PlayerStatsView : RenderableEntity, KeyDownHandler {
         {
         case "p":
             togglePlayerStats()
+        case "l":
+            getPlayerStats().setValues()
         default: 
             break
             // print(key)

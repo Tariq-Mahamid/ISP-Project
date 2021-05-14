@@ -6,15 +6,15 @@ class ExitSceneAS : Layer, KeyDownHandler{
     let scoreboard = Scoreboard()
     var readyToQuit = false
 
-//    let endText : Text
-//    let endValueText : Text
+    let endText : Text
+    let endValueText : Text
     let scoreColor = FillStyle(color:Color(.red))
 
     
     init() {
         
-//        endText = Text(location: Point.zero, text: "GAME OVER XP Earned:     , press m to return to Main Menu" , fillMode: .fill)
-//        endValueText = Text(location: Point.zero, text: "\(scoreboard.scoreValue)" , fillMode: .fill)
+        endText = Text(location: Point.zero, text: "GAME OVER XP Earned:     , press m to return to Main Menu" , fillMode: .fill)
+        endValueText = Text(location: Point.zero, text: "\(scoreboard.scoreValue)" , fillMode: .fill)
 
 
 

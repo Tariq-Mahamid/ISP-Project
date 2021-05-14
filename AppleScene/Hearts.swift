@@ -10,7 +10,7 @@ class Hearts : RenderableEntity {
     let livesText: Text
     let livesValueText : Text
 
-//    let endText : Text
+    let endText : Text
 
     var endValue = 0
     let scoreColor = FillStyle(color:Color(.red))
@@ -20,7 +20,7 @@ class Hearts : RenderableEntity {
     var HeartImage: Image 
  
     init () {
-//       endText = Text(location: Point.zero, text: "GAME OVER, press m to return to Main Menu" , fillMode: .fill)
+       endText = Text(location: Point.zero, text: "GAME OVER, press m to return to Main Menu" , fillMode: .fill)
        livesText = Text(location: Point.zero, text: "Lives Left:", fillMode: .fill)
        livesValueText = Text(location:Point.zero, text:"\(playerLives)", fillMode:.fill)
        
@@ -36,10 +36,10 @@ class Hearts : RenderableEntity {
         livesText.font = "20pt Luminari"
         livesValueText.font = "20pt Luminari"
         
-//        endText.font = "50pt Luminari"
+        endText.font = "50pt Luminari"
 
-//        endText.location = Point(x: canvasSize.center.x, y: canvasSize.center.y)
-//        endText.alignment = .center
+        endText.location = Point(x: canvasSize.center.x, y: canvasSize.center.y)
+        endText.alignment = .center
 
         livesText.location = Point(x: canvasSize.width - 200, y: heartSize.height*2)
         livesValueText.location = Point(x: canvasSize.width-50, y: heartSize.height*2)
@@ -51,7 +51,7 @@ class Hearts : RenderableEntity {
 
        if playerLives <= 0{
 
-//           canvas.render(scoreColor, endText)
+           canvas.render(scoreColor, endText)
        }
            
            if let canvasSize = canvas.canvasSize {
