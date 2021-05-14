@@ -35,4 +35,10 @@ class PlayerStats {
         damage = 50
         chakra = 50
     }
+
+    public func overpoweredValues() {
+        health = 100
+        damage = 100
+        chakra = 100
+    }
 }

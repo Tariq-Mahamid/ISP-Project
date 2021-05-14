@@ -21,12 +21,11 @@ class ForegroundLayerFS : Layer {
     let gameOverScreen = GameoverScreenFS()
 
     init() {
-        playerMoves = PlayerMovesFS()
         playerStats = PlayerStatsFS(size: playerStatsSize, isOpponent: false)
         opponentStats = PlayerStatsFS(size: opponentStatsSize, isOpponent: true)
         playerHealthBar = HealthBarFS(playerStatsSize: playerStatsSize, isOpponent: false)
         opponentHealthBar = HealthBarFS(playerStatsSize: opponentStatsSize, isOpponent: true)
-        
+        playerMoves = PlayerMovesFS()
         player = PlayerRenderFS(playerImageString: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Punch1.png?raw=true", isOpponent: true)
         opponent = PlayerRenderFS(playerImageString: "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/MrBen.jpeg?raw=true", isOpponent: false)
         

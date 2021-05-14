@@ -4,14 +4,15 @@ import Foundation
 
 class HealthBarFS : RenderableEntity{
     public var healthRectangle = Rectangle(rect: Rect())
-    let beginningHealthWidth : Int
+    var beginningHealthWidth : Int
     var healthSize : Size
     var canvasSize = Size()
 
     let startingColor = Color(.green)
     let endingColor = Color(.red)
     var curHealth = 100
-
+    var beginningHealth = 100
+    
     let playerStatsSize : Size
     let isOpponent : Bool
     var playerStatsTopLeft = Point()
@@ -27,11 +28,23 @@ class HealthBarFS : RenderableEntity{
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
+        curHealth = !isOpponent ? playerStatsFS().health : 100
+        beginningHealth = !isOpponent ? playerStatsFS().health : 100
+        
+        
         self.canvasSize = canvasSize
         let topLeft = isOpponent ? Point(x: canvasSize.width - playerStatsSize.width, y: 0) : Point()
         healthRectangle = Rectangle(rect: Rect(topLeft: Point(x: topLeft.x + playerStatsSize.width / 10, y: topLeft.y + playerStatsSize.height * 3 / 5), size: healthSize), fillMode: .fill)
     }
 
+    private func playerStatsFS() -> PlayerStatsFS{
+        guard let mainScene = scene as? FightScene else {
+            fatalError("mainScene of type MainScene is required")
+        }
+        let foregroundLayer =  mainScene.foregroundLayer
+        return foregroundLayer.playerStats
+    }
+    
     private func resizeHealth() {
         healthRectangle.rect.size = healthSize
     }
@@ -55,6 +68,6 @@ class HealthBarFS : RenderableEntity{
     
     public func subtractHealth(_ health: Int){
         curHealth -= health
-        healthSize.width -= beginningHealthWidth * health / 100
+        healthSize.width -= beginningHealthWidth * health / beginningHealth
     }
 }

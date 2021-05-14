@@ -26,13 +26,11 @@ class Garbage : RenderableEntity{
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
-        garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill)
+        garbage = Rectangle(rect: Rect(topLeft: generateSpawnPoint(canvasSize, garbageSpawnNumber: garbageSpawnNumber), size: garbageSize), fillMode: .fill) ///////
         canvas.setup(ImageOfBoulder)
     }
     
     override func render(canvas: Canvas){
-        if (gameEnded) {return}
-        
         let destinationRect = Rect(topLeft: garbage.rect.topLeft, size: garbageSize)
         ImageOfBoulder.renderMode = .destinationRect(destinationRect)
 

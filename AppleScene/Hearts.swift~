@@ -24,7 +24,7 @@ class Hearts : RenderableEntity {
        livesText = Text(location: Point.zero, text: "Lives Left:", fillMode: .fill)
        livesValueText = Text(location:Point.zero, text:"\(playerLives)", fillMode:.fill)
        
-        guard let HeartImageURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Boulder.png?raw=true") else {
+        guard let HeartImageURL = URL(string:"https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Heart.png?raw=true") else {
           fatalError("Failed to create URL for HeartImage")
         }
             HeartImage = Image(sourceURL: HeartImageURL)

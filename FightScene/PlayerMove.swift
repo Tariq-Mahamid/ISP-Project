@@ -32,7 +32,7 @@ public class PlayerMove {
     }
 
     public func calculateCritical() -> Int{
-        return Int(Double(10) * Double.random(in: 1...1.5))
+        return Int(Double(damage) * Double.random(in: 1...1.5))
     }
     
     private func getCloneAttackDamage() -> Int {

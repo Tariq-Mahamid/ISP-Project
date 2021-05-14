@@ -29,4 +29,10 @@ class PlayerStats {
     public func changeChakra(factor: Int) {
         chakra += factor
     }
+
+    public func setValues() {
+        health = 50
+        damage = 50
+        chakra = 50
+    }
 }

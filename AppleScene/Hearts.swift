@@ -48,12 +48,6 @@ class Hearts : RenderableEntity {
    }
    
    override func render(canvas:Canvas) {
-
-       if playerLives <= 0{
-
-           canvas.render(scoreColor, endText)
-       }
-           
            if let canvasSize = canvas.canvasSize {
                for x in 0 ..< playerLives {
                    let currentHeartRect = Rect(topLeft: Point(x: canvasSize.width - ((5 - x) * heartSize.width) , y: heartSize.height / 2), size: heartSize)

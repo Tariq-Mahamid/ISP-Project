@@ -4,8 +4,8 @@ import Scenes
 class PlayerStatsFS : RenderableEntity {
     var background = Rectangle(rect: Rect())
     private let playerName = "Naruto"
-    private var level = 69
-    private var health = 100
+    public var level = 69
+    public var health = 100
 
     var playerNameText : Text
     var levelText : Text
@@ -32,8 +32,11 @@ class PlayerStatsFS : RenderableEntity {
     }
 
     override func setup(canvasSize: Size, canvas: Canvas){
-        level = (getPlayerStats().getDamage() + getPlayerStats().getHealth() + getPlayerStats().getChakra()) / 3
+        
+        level = !isOpponent ? (getPlayerStats().getDamage() + getPlayerStats().getHealth() + getPlayerStats().getChakra()) / 3 : 69
         health = getPlayerStats().getHealth()
+
+        levelText.text = "Level: \(level)"
         
         topLeft = isOpponent ? Point(x: canvasSize.width - size.width, y: 0) : Point()
         background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fill)

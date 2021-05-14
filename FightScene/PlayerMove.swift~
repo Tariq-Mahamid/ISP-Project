@@ -27,6 +27,7 @@ public class PlayerMove {
     public func getDamage() -> Int {
         if (moveType == PlayerMoveType.clone) {return getCloneAttackDamage()}
         else if (moveType == PlayerMoveType.rasenshuriken) {return getRasenShuriken()}
+        else if (moveType == PlayerMoveType.stun) {return 0}
         return calculateCritical()
     }
 
