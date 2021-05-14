@@ -18,6 +18,7 @@ class BackgroundLayer : Layer {
           // We insert our RenderableEntities in the constructor
           insert(entity:background, at:.front)
           insert(entity:Player(), at:.front)
+          insert(entity:Symbol(), at:.front)
           insert(entity: playerStatsView, at:.front)
       }
   }

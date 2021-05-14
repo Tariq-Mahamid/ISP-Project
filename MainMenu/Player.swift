@@ -203,12 +203,11 @@ class Player: RenderableEntity, KeyDownHandler {
             
             moveY(-velocity)
             leftAnimation = !leftAnimation
-            
         default: 
             print(key)
         }
     }
-    
+
     func turnOffRenders() {
         renderUp = false
         renderDown = false

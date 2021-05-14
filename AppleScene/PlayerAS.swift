@@ -61,6 +61,8 @@ class PlayerAS: RenderableEntity, KeyDownHandler, KeyUpHandler {
     
     override func render(canvas:Canvas) {
 
+        if (gameEnded) {return}
+
         if abs(velocity) > 0 {
             leftAnimation = !leftAnimation
         }
