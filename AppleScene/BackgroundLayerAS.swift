@@ -76,9 +76,6 @@ class BackgroundLayerAS : Layer {
                   
                   //print(hearts.playerLives)    
                   hearts.playerLives -= 1
-                  
-                  
-                  
               }
               
               if (isTouchingApple) {
