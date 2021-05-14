@@ -42,6 +42,9 @@ class EndScreenAS : RenderableEntity{
         let scoreText = Text(location: Point(x: endScreen.rect.topLeft.x + 10, y:endScreen.rect.topLeft.y + 250), text: "Experience gained: \(score)")
         scoreText.font = "40pt Luminari"
 
+        endScreenText.alignment = .left
+        scoreText.alignment = .left
+        
         if gameEnded {
             canvas.render(endScreenLineWidth, endScreenStrokeStyle, endScreenFillStyle, endScreen)
             canvas.render(FillStyle(color: Color(.orange)), scoreText, endScreenText)
