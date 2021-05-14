@@ -84,13 +84,13 @@ class PlayerMovesFS : RenderableEntity, EntityMouseClickHandler {
                 let currentForegroundRect = playerMoveChakrasForegroundLayer[currentChakra].rect
                 let currentPlayerMove = playerMoveRectangles[currentChakra].playerMove
 
-                canvas.render(FillStyle(color: Color(.blue)), playerMoveChakrasBackgroundLayer[currentChakra])
+                canvas.render(FillStyle(color: Color(.blue)), StrokeStyle(color: Color(.black)), playerMoveChakrasBackgroundLayer[currentChakra])
                 if (currentPlayerMove.getTotalChakraAmount() > 0) {
                     playerMoveChakrasForegroundLayer[currentChakra].rect = Rect(topLeft: currentForegroundRect.topLeft,
                                                                                 size: Size(width: (playerChakraSize.width * currentPlayerMove.getCurrentChakra()) / currentPlayerMove.getTotalChakraAmount(),
                                                                                            height: playerChakraSize.height))
                     
-                    canvas.render(FillStyle(color: Color(.deepskyblue)), playerMoveChakrasForegroundLayer[currentChakra])
+                    canvas.render(FillStyle(color: Color(.deepskyblue)), StrokeStyle(color: Color(.black)), playerMoveChakrasForegroundLayer[currentChakra])
                 }
             }
         }

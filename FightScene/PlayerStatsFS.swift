@@ -57,7 +57,7 @@ class PlayerStatsFS : RenderableEntity {
     override func render(canvas: Canvas){
         assignBackgroundPoints(canvas)
         background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fillAndStroke)
-        canvas.render(LineWidth(width: 10), FillStyle(color: Color(.gray)), background)
+        canvas.render(LineWidth(width: 10), FillStyle(color: Color(.gray)), StrokeStyle(color: Color(.black)), background)
 
         canvas.render(FillStyle(color: Color(.black)), playerNameText)
         canvas.render(FillStyle(color: Color(.black)), levelText)

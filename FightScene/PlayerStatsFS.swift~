@@ -37,6 +37,7 @@ class PlayerStatsFS : RenderableEntity {
         health = getPlayerStats().getHealth()
 
         levelText.text = "Level: \(level)"
+        
         topLeft = isOpponent ? Point(x: canvasSize.width - size.width, y: 0) : Point()
         background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fill)
     }
@@ -54,8 +55,6 @@ class PlayerStatsFS : RenderableEntity {
     }
     
     override func render(canvas: Canvas){
-        print("Health: \(getPlayerStats().getHealth())")
-        
         assignBackgroundPoints(canvas)
         background = Rectangle(rect: Rect(topLeft: topLeft, size: size), fillMode: .fillAndStroke)
         canvas.render(LineWidth(width: 10), FillStyle(color: Color(.gray)), background)

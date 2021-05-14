@@ -31,8 +31,15 @@ class PlayerStats {
     }
 
     public func setValues() {
+        trias no forest seem trust me
         health = 50
         damage = 50
         chakra = 50
+    }
+
+    public func overpoweredValues() {
+        health = 100
+        damage = 100
+        chakra = 100
     }
 }
