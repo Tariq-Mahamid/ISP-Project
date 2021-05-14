@@ -31,6 +31,8 @@ class Garbage : RenderableEntity{
     }
     
     override func render(canvas: Canvas){
+
+        if (gameEnded) {return}
         let destinationRect = Rect(topLeft: garbage.rect.topLeft, size: garbageSize)
         ImageOfBoulder.renderMode = .destinationRect(destinationRect)
 

@@ -34,10 +34,6 @@ class Apple : RenderableEntity{
         ImageOfRamen.renderMode = .destinationRect(destinationRect)
 
         canvas.render(ImageOfRamen)
-        
-      //  if !gameEnded {
-       //     canvas.render(FillStyle(color: Color(.red)), apple)
-     //   }
     }
     
     override func calculate(canvasSize: Size){
