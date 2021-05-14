@@ -104,7 +104,7 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
             canvas.render(getRightBlockImage())
         }
 
-        if (75 > block.rect.bottomLeft.x && 75 < block.rect.bottomRight.x) || (125 > block.rect.bottomLeft.x && 125 < block.rect.bottomRight.x) {
+        if (75 > block.rect.bottomLeft.x && 75 < block.rect.bottomRight.x) || (175 > block.rect.bottomLeft.x && 175 < block.rect.bottomRight.x) {
             touchingPlayer = true
         }
         else {

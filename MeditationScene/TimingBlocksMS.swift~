@@ -1,5 +1,6 @@
 import Igis
 import Scenes
+import Foundation
 
 class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var block = Rectangle(rect: Rect())
@@ -12,8 +13,40 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
     var scored = false
     var timed = false
     var gameEnded = false
+
+    let blockColorNumber1URL = "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Wind.png?raw=true"
+    let blockColorNumber2URL = "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Lightning.png?raw=true"
+    let blockColorNumber3URL = "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Fire.png?raw=true"
+    let blockColorNumber4URL = "https://github.com/Tariq-Mahamid/ISP-Project/blob/master/Images/Water.png?raw=true"
+
+    let backgroundImage1 : Image
+    let backgroundImage2 : Image
+    let backgroundImage3 : Image
+    let backgroundImage4 : Image
+
     
     init() {
+        guard let imageURL1 = URL(string:blockColorNumber1URL) else {
+            fatalError("Failed to create URL for whitehouse")
+        }
+
+        guard let imageURL2 = URL(string:blockColorNumber2URL) else {
+            fatalError("Failed to create URL for whitehouse")
+        }
+
+        guard let imageURL3 = URL(string:blockColorNumber3URL) else {
+            fatalError("Failed to create URL for whitehouse")
+        }
+
+        guard let imageURL4 = URL(string:blockColorNumber4URL) else {
+            fatalError("Failed to create URL for whitehouse")
+        }
+        
+        backgroundImage1 = Image(sourceURL:imageURL1)
+        backgroundImage2 = Image(sourceURL:imageURL2)
+        backgroundImage3 = Image(sourceURL:imageURL3)
+        backgroundImage4 = Image(sourceURL:imageURL4)
+
         super.init(name: "TimingBlock")
     }
 
@@ -32,7 +65,26 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
         fillStyle = FillStyle(color: Color(.gray))
         canvasWidth = canvasSize.width
         fillStyle = FillStyle(color: randomizeBlockColor())
+        canvas.setup(backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4)
     }
+
+    func getRightBlockImage() -> Image {
+        
+        switch fillStyleColorNumber {
+        case 1:
+            return backgroundImage1
+        case 2:
+            return backgroundImage2
+        case 3:
+            return backgroundImage3
+        case 4:
+            return backgroundImage4
+        default:
+            print("The fillStyleColorNumber '\(fillStyleColorNumber) is not from 1 to 4.")
+        }
+        return backgroundImage1
+    }
+
 
     override func teardown() {
         dispatcher.unregisterKeyDownHandler(handler: self)
@@ -45,7 +97,12 @@ class TimingBlockMS: RenderableEntity, KeyDownHandler {
             gameEnded = true
         }
 
-        canvas.render(fillStyle, block)
+//        canvas.render(fillStyle, block)
+
+        if getRightBlockImage().isReady {
+            getRightBlockImage().renderMode = .destinationRect(Rect(topLeft:Point(x:block.rect.topLeft.x, y:block.rect.topLeft.y), size:Size(width:120, height:100)))
+            canvas.render(getRightBlockImage())
+        }
 
         if (75 > block.rect.bottomLeft.x && 75 < block.rect.bottomRight.x) || (125 > block.rect.bottomLeft.x && 125 < block.rect.bottomRight.x) {
             touchingPlayer = true
